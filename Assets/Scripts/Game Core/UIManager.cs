@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class UIMatager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     public void ShowOrder(Order order)
     {

@@ -12,7 +12,7 @@ static class ScoreCalculator
 
     public static float CalculateAccuracy()
     {
-
+    
     }
     public static int CalculateCocktailScore()
     {
