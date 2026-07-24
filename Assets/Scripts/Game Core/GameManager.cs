@@ -21,12 +21,12 @@ public class GameManager : MonoBehaviour
          
     }
     
-    public UIMatager createUIManager()
+    public UIManager createUIManager()
     {
-        return new UIMatager();
+        return new UIManager();
     }
 
-    public void UseUImanager(UIMatager uIMatager)
+    public void UseUImanager(UIManager uIMatager)
     {
 
     }

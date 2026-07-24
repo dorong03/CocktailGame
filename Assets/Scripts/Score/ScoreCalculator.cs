@@ -12,14 +12,14 @@ static class ScoreCalculator
 
     public static float CalculateAccuracy()
     {
-    
+        return 0.0f;
     }
     public static int CalculateCocktailScore()
     {
-
+        return 0;
     }
     public static int CalculateFinalScore()
     {
-
+        return 0;
     }
 }

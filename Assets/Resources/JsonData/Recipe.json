@@ -1,0 +1,16 @@
+﻿[
+  {
+    "Id": "RECIPE_000",
+    "Name": "진 토닉",
+    "BaseScore": 1000,
+    "ToolId": "TOOL_000",
+    "Ingredient": ["ING_000:30", "ING_001:90"]
+  },
+  {
+    "Id": "RECIPE_001",
+    "Name": "진 토닉 2",
+    "BaseScore": 1200,
+    "ToolId": null,
+    "Ingredient": ["ING_000:30", "ING_001:90"]
+  }
+]
