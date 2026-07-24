@@ -53,15 +53,32 @@ namespace ExcelParser
                     return value;
                 case "int":
                     return (int)double.Parse(value);
+                case "float":
+                    return (float)double.Parse(value);
+                case "double":
+                    return double.Parse(value);
                 case "List<string>":
-                    List<string> list = new();
+                    List<string> stringList = new();
 
                     foreach (string item in value.Split(','))
                     {
-                        list.Add(item.Trim());
+                        stringList.Add(item.Trim());
+                    }
+                    return stringList;
+                case "List<IngredientAmount>":
+                    List<IngredientAmount> ingredientAmounts = new List<IngredientAmount>();
+
+                    foreach (string item in value.Split(','))
+                    {
+                        string[] splits = item.Trim().Split(":");
+                        
+                        IngredientAmount ingredientAmount = new IngredientAmount();
+                        ingredientAmount.IngredientId = splits[0];
+                        ingredientAmount.Amount = float.Parse(splits[1]);
+                        ingredientAmounts.Add(ingredientAmount);
                     }
 
-                    return list;
+                    return ingredientAmounts;
                 default:
                     throw new Exception($"테이블에서 지원하지 않는 타입 -> {type}");
             }
@@ -133,6 +150,28 @@ namespace ExcelParser
 
                 sb.Append("]");
 
+                return sb.ToString();
+            }
+
+            if (value is List<IngredientAmount> ingredientAmounts)
+            {
+                StringBuilder sb = new StringBuilder();
+                sb.Append("[");
+
+                for (int i = 0; i < ingredientAmounts.Count; i++)
+                {
+                    var entry = ingredientAmounts[i];
+                    sb.Append("{\"IngredientId\": ");
+                    sb.Append(JsonString(entry.IngredientId));
+                    sb.Append(", \"Amount\": ");
+                    sb.Append(entry.Amount);
+                    sb.Append("}");
+
+                    if (i != ingredientAmounts.Count - 1)
+                        sb.Append(", ");
+                }
+
+                sb.Append("]");
                 return sb.ToString();
             }
 

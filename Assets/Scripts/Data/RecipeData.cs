@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RecipeData : MonoBehaviour
+public class RecipeData
 {
     public string Id;
     public string Name;

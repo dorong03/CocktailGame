@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class IngredientAmount : MonoBehaviour
+[System.Serializable]
+public class IngredientAmount
 {
     public string IngredientId;
     public float Amount;
