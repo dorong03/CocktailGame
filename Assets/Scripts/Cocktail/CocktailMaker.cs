@@ -23,6 +23,6 @@ public class CocktailMaker : MonoBehaviour
     }
     private MixResult CreateMixResult()
     {
-
+        return null;
     }
 }

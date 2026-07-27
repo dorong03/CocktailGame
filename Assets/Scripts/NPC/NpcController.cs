@@ -11,7 +11,7 @@ public class NpcController : MonoBehaviour
     }
     public Order CreateOrder()
     {
-
+        return null;
     }
     public void Dismiss()
     {
@@ -19,6 +19,6 @@ public class NpcController : MonoBehaviour
     }
     public Order GetCurrentOrder()
     {
-
+        return null;
     }
 }

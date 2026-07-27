@@ -16,6 +16,6 @@ public class ScoreSystem : MonoBehaviour
 
     public int GetScore()
     {
-
+        return 0;
     }
 }

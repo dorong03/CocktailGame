@@ -4,6 +4,7 @@ public class GameTimer : MonoBehaviour
 {
     private float remainTime;
 
+
     public void Start()
     {
         

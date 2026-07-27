@@ -18,6 +18,6 @@ public class ServingController : MonoBehaviour
     }
     public Grade Judge()
     {
-
+        return 0;
     }
 }

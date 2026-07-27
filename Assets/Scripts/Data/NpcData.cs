@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NpcData : MonoBehaviour
+public class NpcData
 {
     public string Id;
     public string Name;

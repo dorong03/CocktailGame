@@ -21,22 +21,22 @@ public class DataRepository : MonoBehaviour
 
     public NpcData GetNpc(string Id)
     {
-        return npcData.get(Id);
+        return null;
     }
     public OrderGroupData GetOrderGroup(string Id)
     {
-        return orderGroupData.get(Id);
+        return null;
     }
     public RecipeData GetRecipeData(string Id)
     {
-        return recipeData.get(Id);
+        return null;
     }
     public IngredientData GetIngredientData(string Id)
     {
-        return ingredientData.get(Id);
+        return null;
     }
     public ToolData GetTool(string Id)
     {
-        return toolData.get(Id);
+        return null;
     }
 }
