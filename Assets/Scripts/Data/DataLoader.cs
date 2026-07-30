@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DataLoader : MonoBehaviour
+public class DataLoader
 {
     public void LoadAll()
     {

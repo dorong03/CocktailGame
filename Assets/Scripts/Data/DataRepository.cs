@@ -8,35 +8,69 @@ public class DataRepository : MonoBehaviour
     private Dictionary<string, RecipeData> recipeData;
     private Dictionary<string, IngredientData> ingredientData;
     private Dictionary<string, ToolData> toolData;
+    private Dictionary<string, Sprite> ingredientSprites;
+    private Dictionary<string, Sprite> npcSprite;
 
-    public DataLoader createDataLoader()
+    public NpcData GetNpc(string id)
     {
-        return new DataLoader();
-    }
-
-    public void UseDataLoader(DataLoader dataLoader)
-    {
-
-    }
-
-    public NpcData GetNpc(string Id)
-    {
+        if (npcData.TryGetValue(id, out var value))
+        {
+            return value;
+        }
         return null;
     }
-    public OrderGroupData GetOrderGroup(string Id)
+
+    public RecipeData GetRecipeData(string id)
     {
+        if (recipeData.TryGetValue(id, out var value))
+        {
+            return value;
+        }
         return null;
     }
-    public RecipeData GetRecipeData(string Id)
+
+    public IngredientData GetIngredientData(string id)
     {
+        if (ingredientData.TryGetValue(id, out var value))
+        {
+            return value;
+        }
         return null;
     }
-    public IngredientData GetIngredientData(string Id)
+
+    public ToolData GetTool(string id)
     {
+        if (toolData.TryGetValue(id, out var value))
+        {
+            return value;
+        }
         return null;
     }
-    public ToolData GetTool(string Id)
+
+    public OrderGroupData GetOrderGroup(string id)
     {
+        if (orderGroupData.TryGetValue(id, out var value))
+        {
+            return value;
+        }
+        return null;
+    }
+
+    public Sprite GetIngredientSprite(string id)
+    {
+        if (ingredientSprites.TryGetValue(id, out var value))
+        {
+            return value;
+        }
+        return null;
+    }
+
+    public Sprite GetNpcSprite(string id)
+    {
+        if (npcSprite.TryGetValue(id, out var value))
+        {
+            return value;
+        }
         return null;
     }
 }
