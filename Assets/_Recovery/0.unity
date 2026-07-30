@@ -352,6 +352,7 @@ GameObject:
   - component: {fileID: 1016876105}
   - component: {fileID: 1016876103}
   - component: {fileID: 1016876107}
+  - component: {fileID: 1016876108}
   m_Layer: 0
   m_Name: Ingredient
   m_TagString: Untagged
@@ -491,6 +492,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb96aba300b28d42a4db51279535266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragInput
+  interactable: 0
+--- !u!114 &1016876108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1016876101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1317287a84c916a4fb0c99048081e075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Bottle
 --- !u!1 &1282758586
 GameObject:
   m_ObjectHideFlags: 0

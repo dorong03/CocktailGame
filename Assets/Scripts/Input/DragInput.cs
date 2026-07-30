@@ -36,7 +36,6 @@ public class DragInput : MonoBehaviour
 
     private void Update()
     {
-        
         Vector2 screenPos = Mouse.current.position.ReadValue();
         Vector2 worldPos = _camera.ScreenToWorldPoint(screenPos);
 
