@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Seat : MonoBehaviour
 {
@@ -16,12 +17,13 @@ public class Seat : MonoBehaviour
         return Grade.Miss;
     }
     
+    // 실제로는 아직 Y 축 검사는 안해서 박스 좌우 선분만 확인할 것
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         for (int i = 0; i < zoneHalfWidth.Length; i++)
         {
-            Vector3 boxSize = new Vector3(zoneHalfWidth[i], zoneHalfWidth[i], 0);
+            Vector3 boxSize = new Vector3(zoneHalfWidth[i] * 2, zoneHalfWidth[i] * 2, 0);
             Gizmos.DrawWireCube(transform.position, boxSize);
         }
     }
