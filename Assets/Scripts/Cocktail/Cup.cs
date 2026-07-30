@@ -18,8 +18,12 @@ public class Cup : MonoBehaviour, IPourTarget
     private Action onSubmit;
     private Action<Vector2> onThrowRelease;
 
+    // 잔이 날라가는 속도와 줄어드는 속도 크기
     private const float MaxSpeed = 8f;
     private const float Deceleration = 12f;
+    
+    // 술이 차오르는 픽셀 기준
+    const int pixelStep = 8;
     
     private void Awake()
     {
@@ -105,9 +109,14 @@ public class Cup : MonoBehaviour, IPourTarget
 
     public void SetFill(float ratio, Color color)
     {
+        ratio = Mathf.Clamp01(ratio);
+        
+        float steppedRatio = Mathf.Floor(ratio * pixelStep) / pixelStep;
+        
         fillRenderer.color = color;
-        Vector3 localScale = fillRenderer.transform.localScale;
-        localScale.y = ratio;
-        fillRenderer.transform.localScale = localScale;
+        
+        Vector3 scale = fillRenderer.transform.localScale;
+        scale.y = Mathf.Max(1f / pixelStep, steppedRatio);
+        fillRenderer.transform.localScale = scale;
     }
 }
