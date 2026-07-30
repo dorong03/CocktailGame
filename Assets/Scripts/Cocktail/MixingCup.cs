@@ -5,23 +5,6 @@ using UnityEngine.InputSystem;
 
 public class MixingCup : MonoBehaviour, IPourTarget
 {
-    // 테스트 코드
-    public Cup cup;
-
-    void Update()
-    {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            PourInto(cup, 1f, 2f, Color.blue, TestDebug);
-        }
-    }
-
-    void TestDebug()
-    {
-        Debug.Log("Pressed");
-    }
-    // 테스트 코드 끄으읕
-    
     // 이게 액체가 들어갔는 판정을 할 렌더러
     [SerializeField] 
     private SpriteRenderer mouthRenderer;
