@@ -20,7 +20,7 @@ public class ShakerTool : ToolBase
     protected override void GrabHandler()
     {
         base.GrabHandler();
-        StartCoroutine(CloseShaker());
+        if(started) StartCoroutine(CloseShaker());
     }
 
     private IEnumerator CloseShaker()
