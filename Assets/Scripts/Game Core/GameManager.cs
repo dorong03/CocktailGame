@@ -2,65 +2,45 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private Order currentOder;
-    private MixResult currentMixResult;
-    public GameTimer createGameTimer()
-    {
-        return new GameTimer();
-    }
-   public void UseGaneTimer(GameTimer gameTimer)
-    {
-
-    }
-    public ScoreSystem createScoreSystem()
-    {
-        return new ScoreSystem();
-    }
-    public void UseScoreSystem(ScoreSystem scoreSystem)
-    {
-         
-    }
-    
-    public UIManager createUIManager()
-    {
-        return new UIManager();
-    }
-
-    public void UseUImanager(UIManager uIMatager)
-    {
-
-    }
-    public SoundManager createSoundManager()
-    {
-        return new SoundManager();
-    }
-
-    public void UseSoundManager(SoundManager soundManager)
-    {
-
-    }
+    private GamePhase Phase;
+    private Order currentOrder;
+    private GameTimer timer;
+    private ScoreSystem score;
+    private OrderService orderService;
+    private NpcController npcController;
+    private PlayerStationController Station;
 
     public void StartGame()
     {
-
+        
     }
-    public void RequestNextOrder()
+
+    public void GoToMainMenu()
     {
 
     }
-    public void FinishMixing()
-    {
 
-    }
-    public void FinishTool()
-    {
-
-    }
-    public void FinishServing()
-    {
-
-    }
     public void EndGame()
+    {
+
+    }
+
+    private void NextRound()
+    {
+
+    }
+
+    private void OnNpcArrived()
+    {
+
+    }
+
+    private void OnStationComplete(int result)
+    {
+
+    }
+
+    private void HandleTimeOver()
     {
 
     }

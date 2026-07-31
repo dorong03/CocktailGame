@@ -9,13 +9,8 @@ public class ScoreSystem : MonoBehaviour
 
     }
 
-    public void Reset()
+    public bool CommitHigScore()
     {
-        
-    }
-
-    public int GetScore()
-    {
-        return 0;
+        return false;
     }
 }
