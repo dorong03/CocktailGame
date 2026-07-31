@@ -54,7 +54,7 @@ public class BarSpoonTool : ToolBase
 
         transform.position = target;
 
-        Vector2 dir = (Vector2)drag.CurrentWorldPos - (Vector2)stirCenter.position;
+        Vector2 dir = (Vector2)target - (Vector2)stirCenter.position;
 
         if (dir.magnitude < minStirRadius)
         {
