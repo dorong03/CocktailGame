@@ -6,9 +6,9 @@ public class GameManager : MonoBehaviour
     private Order currentOrder;
     private GameTimer timer;
     private ScoreSystem score;
-    private OrderService orderService;
+    // private OrderService orderService;
     private NpcController npcController;
-    private PlayerStationController Station;
+    // private PlayerStationController Station;
 
     public void StartGame()
     {
