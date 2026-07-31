@@ -6,19 +6,19 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(Collider2D))]
 public class DragInput : MonoBehaviour
 {
-    // È¤½Ã ÇöÀç ´Ù¸¥ °´Ã¼°¡ µå·¡°í ÇÏ°í ÀÖ´ÂÁö °Ë»ç?
+    // È¤ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½å·¡ï¿½ï¿½ ï¿½Ï°ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ ï¿½Ë»ï¿½?
     private static DragInput dragItem;
 
-    // ÇöÀç ÇØ´ç °´Ã¼°¡ »óÈ£ÀÛ¿ë °¡´ÉÇÑ »óÅÂÀÎÁö
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½Ø´ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½È£ï¿½Û¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public bool interactable;
 
-    // ÇöÀç ±×·¦À» ÇÏ°í ÀÖ´Â°¡?
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½×·ï¿½ï¿½ï¿½ ï¿½Ï°ï¿½ ï¿½Ö´Â°ï¿½?
     public bool IsGrabbed { get; private set; }
-    // ±×·¦À» ½ÃÀÛÇÑ ¸¶¿ì½ºÀÇ À§Ä¡
+    // ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½ï¿½Ä¡
     public Vector3 GrabWorldPos { get; private set; }
-    // ±×·¦À» ÇÑ »óÅÂ¿¡¼­ ¸¶¿ì½ºÀÇ À§Ä¡
+    // ï¿½×·ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ì½ºï¿½ï¿½ ï¿½ï¿½Ä¡
     public Vector3 CurrentWorldPos { get; private set; }
-    // ÃÑ ÀÌµ¿ °Å¸®
+    // ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Å¸ï¿½
     public float TotalDragDistance { get; private set; }
 
     public Action onGrab;
@@ -82,10 +82,5 @@ public class DragInput : MonoBehaviour
     public void SetCollider(Collider2D collider)
     {
         _collider = collider;
-        if(dragItem == this)
-        {
-            IsGrabbed = false;
-            dragItem = null;
-        }
     }
 }
