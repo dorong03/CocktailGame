@@ -5,6 +5,7 @@ public abstract class ToolBase : MonoBehaviour
 {
     protected string toolId;
     protected int requiredCount;
+    [SerializeField]
     protected int count;
     protected bool started;
     protected DragInput drag;
@@ -62,6 +63,7 @@ public abstract class ToolBase : MonoBehaviour
             started = false;
             drag.interactable = false;
             count = 0;
+            ResetMotion();
             onComplete?.Invoke();
         }
     }
