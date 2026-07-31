@@ -36,7 +36,7 @@ public abstract class ToolBase : MonoBehaviour
         ResetMotion();
     }
 
-    private void GrabHandler()
+    protected virtual void GrabHandler()
     {
         if (started) return;
         if (canStart != null && !canStart())

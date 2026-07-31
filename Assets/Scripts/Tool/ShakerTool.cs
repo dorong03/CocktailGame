@@ -1,33 +1,8 @@
+using System.Collections;
 using UnityEngine;
 
 public class ShakerTool : ToolBase
 {
-    #region ±ÙÈ£ ¿¬½À ÄÚµå
-    //private Vector2 delta;
-    //private float contentDeltaUp = 0.3f;
-    //private float contentDeltaDown = -0.3f;
-    //private bool deltaUp;
-    //private bool deltaDown;
-
-    //private void ShakeJurge()
-    //{
-    //    if (delta.y < contentDeltaUp)
-    //    {
-    //        deltaUp = true;
-    //        deltaDown = false;
-    //    }
-    //    else if(delta.y > -contentDeltaDown)
-    //    {
-    //        deltaDown = true;
-    //        deltaUp = false;
-    //    }
-    //    else
-    //    {
-    //        deltaUp = false;
-    //        deltaDown = false;
-    //    }
-    //}
-    #endregion 
     private const int ShakerToolCount = 5;
 
     private float speedThreshold = 0.3f;
@@ -40,26 +15,29 @@ public class ShakerTool : ToolBase
     {
         originPos = transform.position;
         requiredCount = ShakerToolCount;
-
-        /*
-         * Àá½Ã Å×½ºÆ® ¿ëÀ¸·Î ¸¸µç ÃÊ±âÈ­ ¸Ş¼Òµå ÀÔ´Ï´Ù.
-         */
-        //ActiveTool(TestReturn, null, null, null);
     }
 
-    /*
-     * Å×½ºÆ®¿¡ »ç¿ëÇÑ ¸Ş¼Òµå
-     */
-    //public bool TestReturn()
-    //{
-    //    return true;
-    //}
+    protected override void GrabHandler()
+    {
+        base.GrabHandler();
+        StartCoroutine(CloseShaker());
+    }
 
+    private IEnumerator CloseShaker()
+    {
+        // ëšœê»‘ì´ ë‹«íˆëŠ” ì½”ë“œ êµ¬í˜„
+        yield return null;
+    }
+    
+    private IEnumerator OpenShaker()
+    {
+        // ëšœê»‘ì´ ì—´ë¦¬ëŠ” ì½”ë“œ
+        yield return null;
+    }
+    
     public override void HandleDelta(Vector2 delta)
     {
         transform.position = drag.CurrentWorldPos;
-        //this.delta = delta;
-
         ShakeJudge(delta);
     }
 
