@@ -20,6 +20,7 @@ public abstract class ToolBase : MonoBehaviour
         drag = GetComponent<DragInput>();
         drag.onGrab = GrabHandler;
         drag.onDragDelta = DragHandler;
+        drag.onRelease = ReleaseHandler;
     }
     
     public void ActiveTool(Func<bool> canStart, Action onBlock, Action onStarted, Action onComplete)
@@ -52,8 +53,6 @@ public abstract class ToolBase : MonoBehaviour
         if (!started) return;
         HandleDelta(delta);
     }
-    
-    public abstract void HandleDelta(Vector2 delta);
 
     protected void AddCount()
     {
@@ -78,8 +77,13 @@ public abstract class ToolBase : MonoBehaviour
         ResetMotion();
     }
 
-    /*
-     * 도구 별로 잡았다가 놓았을때 초기화 되는 부분
-     */
+    private void ReleaseHandler()
+    {
+        if (!started) return;
+        ResetMotion();
+    }
+    
+    public abstract void HandleDelta(Vector2 delta);
+    
     public abstract void ResetMotion();
 }
