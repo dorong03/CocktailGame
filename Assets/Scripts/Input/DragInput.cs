@@ -78,4 +78,14 @@ public class DragInput : MonoBehaviour
         if (dragItem == this) dragItem = null;
         onRelease?.Invoke();
     }
+
+    public void SetCollider(Collider2D collider)
+    {
+        _collider = collider;
+        if(dragItem == this)
+        {
+            IsGrabbed = false;
+            dragItem = null;
+        }
+    }
 }
