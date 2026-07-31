@@ -7,6 +7,7 @@ public class BarSpoonTool : ToolBase
 
     [SerializeField] private Collider2D mixingCupCollider;
     [SerializeField] private Collider2D barSpoonCollider;
+    [SerializeField] private Collider2D moveAreaCollider;
     
     private const int BarSpoonToolCount = 10;
 
@@ -42,7 +43,16 @@ public class BarSpoonTool : ToolBase
     
     public override void HandleDelta(Vector2 delta)
     {
-        transform.position = drag.CurrentWorldPos;
+        Vector3 target = drag.CurrentWorldPos;
+
+        if (moveAreaCollider != null)
+        {
+            Bounds b = moveAreaCollider.bounds;
+            target.x = Mathf.Clamp(target.x, b.min.x, b.max.x);
+            target.y = Mathf.Clamp(target.y, b.min.y, b.max.y);
+        }
+
+        transform.position = target;
 
         Vector2 dir = (Vector2)drag.CurrentWorldPos - (Vector2)stirCenter.position;
 
