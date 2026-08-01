@@ -55,7 +55,7 @@ public abstract class ToolBase : MonoBehaviour
         HandleDelta(delta);
     }
 
-    protected void AddCount()
+    protected void AddCount(Action onFinished)
     {
         count++;
         if (count >= requiredCount)
@@ -64,6 +64,7 @@ public abstract class ToolBase : MonoBehaviour
             drag.interactable = false;
             count = 0;
             ResetMotion();
+            onFinished?.Invoke();
             onComplete?.Invoke();
         }
     }

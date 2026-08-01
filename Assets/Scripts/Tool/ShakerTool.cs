@@ -1,5 +1,7 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ShakerTool : ToolBase
 {
@@ -10,28 +12,53 @@ public class ShakerTool : ToolBase
 
     private Vector2 originPos;
 
+    [SerializeField]
+    private Transform closeHeadPos;
+    [SerializeField]
+    private Transform homeHeadPos;
+    [SerializeField]
+    private Transform head;
+    [SerializeField]
+    private Transform targetParent;
+
 
     public void Start()
     {
         originPos = transform.position;
         requiredCount = ShakerToolCount;
+        ActiveTool(TestActive, null, null, null);
     }
 
+    private bool TestActive()
+    {
+        return true;
+    }
     protected override void GrabHandler()
     {
         base.GrabHandler();
-        if(started) StartCoroutine(CloseShaker());
+        if (started) StartCoroutine(CloseShaker());
     }
 
     private IEnumerator CloseShaker()
     {
         // 뚜껑이 닫히는 코드 구현
+        // 추후 애니메이션 구현
+        head.SetParent(targetParent);
+        head.position = closeHeadPos.position;
         yield return null;
     }
-    
+
+    private void StartOpenShaker()
+    {
+        StartCoroutine(OpenShaker());
+    }
+
     private IEnumerator OpenShaker()
     {
         // 뚜껑이 열리는 코드
+        // 추후 애니메이션 구현
+        head.SetParent(null);
+        head.position = homeHeadPos.position;
         yield return null;
     }
     
@@ -51,7 +78,7 @@ public class ShakerTool : ToolBase
         if (direction == isUp)
         {
             direction = !direction;
-            AddCount();
+            AddCount(StartOpenShaker);
             return;
         }
     }
