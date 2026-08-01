@@ -76,7 +76,7 @@ public class BarSpoonTool : ToolBase
 
         if (Mathf.Abs(accumulatedAngle) >= 360f)
         {
-            AddCount();
+            AddCount(null);
             accumulatedAngle = 0f;
         }
     }
