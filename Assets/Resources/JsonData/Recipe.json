@@ -1,0 +1,107 @@
+﻿[
+  {
+    "Id": "RECIPE_000",
+    "Name": "레몬 하이라이트",
+    "BaseScore": 900,
+    "ToolId": null,
+    "Ingredients": [{"IngredientId": "ING_000", "Amount": 30}, {"IngredientId": "ING_004", "Amount": 120}, {"IngredientId": "ING_002", "Amount": 15}]
+  },
+  {
+    "Id": "RECIPE_001",
+    "Name": "진토닉 라임",
+    "BaseScore": 900,
+    "ToolId": null,
+    "Ingredients": [{"IngredientId": "ING_007", "Amount": 45}, {"IngredientId": "ING_008", "Amount": 120}, {"IngredientId": "ING_001", "Amount": 15}]
+  },
+  {
+    "Id": "RECIPE_002",
+    "Name": "모히토 브리즈",
+    "BaseScore": 1200,
+    "ToolId": "TOOL_001",
+    "Ingredients": [{"IngredientId": "ING_005", "Amount": 45}, {"IngredientId": "ING_001", "Amount": 20}, {"IngredientId": "ING_003", "Amount": 10}, {"IngredientId": "ING_004", "Amount": 90}]
+  },
+  {
+    "Id": "RECIPE_003",
+    "Name": "보드카 소다",
+    "BaseScore": 900,
+    "ToolId": null,
+    "Ingredients": [{"IngredientId": "ING_006", "Amount": 45}, {"IngredientId": "ING_000", "Amount": 15}, {"IngredientId": "ING_004", "Amount": 120}]
+  },
+  {
+    "Id": "RECIPE_004",
+    "Name": "토닉 교향곡",
+    "BaseScore": 1200,
+    "ToolId": "TOOL_001",
+    "Ingredients": [{"IngredientId": "ING_008", "Amount": 120}, {"IngredientId": "ING_007", "Amount": 45}, {"IngredientId": "ING_000", "Amount": 15}, {"IngredientId": "ING_002", "Amount": 10}]
+  },
+  {
+    "Id": "RECIPE_005",
+    "Name": "럼의 전설",
+    "BaseScore": 1000,
+    "ToolId": "TOOL_001",
+    "Ingredients": [{"IngredientId": "ING_005", "Amount": 45}, {"IngredientId": "ING_001", "Amount": 20}, {"IngredientId": "ING_003", "Amount": 10}]
+  },
+  {
+    "Id": "RECIPE_006",
+    "Name": "호넷",
+    "BaseScore": 1000,
+    "ToolId": "TOOL_001",
+    "Ingredients": [{"IngredientId": "ING_000", "Amount": 30}, {"IngredientId": "ING_002", "Amount": 15}, {"IngredientId": "ING_005", "Amount": 45}]
+  },
+  {
+    "Id": "RECIPE_007",
+    "Name": "보드카 라임",
+    "BaseScore": 800,
+    "ToolId": null,
+    "Ingredients": [{"IngredientId": "ING_006", "Amount": 45}, {"IngredientId": "ING_001", "Amount": 15}]
+  },
+  {
+    "Id": "RECIPE_008",
+    "Name": "진 온더락",
+    "BaseScore": 800,
+    "ToolId": null,
+    "Ingredients": [{"IngredientId": "ING_007", "Amount": 45}, {"IngredientId": "ING_000", "Amount": 15}]
+  },
+  {
+    "Id": "RECIPE_009",
+    "Name": "칸찬차라",
+    "BaseScore": 1000,
+    "ToolId": "TOOL_001",
+    "Ingredients": [{"IngredientId": "ING_005", "Amount": 45}, {"IngredientId": "ING_002", "Amount": 15}, {"IngredientId": "ING_004", "Amount": 90}]
+  },
+  {
+    "Id": "RECIPE_010",
+    "Name": "보드카 비스니즈",
+    "BaseScore": 1100,
+    "ToolId": "TOOL_000",
+    "Ingredients": [{"IngredientId": "ING_000", "Amount": 20}, {"IngredientId": "ING_002", "Amount": 15}, {"IngredientId": "ING_006", "Amount": 45}]
+  },
+  {
+    "Id": "RECIPE_011",
+    "Name": "민트 왕관",
+    "BaseScore": 1100,
+    "ToolId": "TOOL_000",
+    "Ingredients": [{"IngredientId": "ING_003", "Amount": 5}, {"IngredientId": "ING_009", "Amount": 90}, {"IngredientId": "ING_000", "Amount": 10}]
+  },
+  {
+    "Id": "RECIPE_012",
+    "Name": "보드카 모히토",
+    "BaseScore": 1100,
+    "ToolId": "TOOL_000",
+    "Ingredients": [{"IngredientId": "ING_006", "Amount": 45}, {"IngredientId": "ING_001", "Amount": 20}, {"IngredientId": "ING_003", "Amount": 10}]
+  },
+  {
+    "Id": "RECIPE_013",
+    "Name": "진 리키",
+    "BaseScore": 1100,
+    "ToolId": "TOOL_000",
+    "Ingredients": [{"IngredientId": "ING_007", "Amount": 45}, {"IngredientId": "ING_000", "Amount": 20}, {"IngredientId": "ING_004", "Amount": 60}]
+  },
+  {
+    "Id": "RECIPE_014",
+    "Name": "럼 사워",
+    "BaseScore": 1100,
+    "ToolId": "TOOL_000",
+    "Ingredients": [{"IngredientId": "ING_005", "Amount": 45}, {"IngredientId": "ING_000", "Amount": 15}, {"IngredientId": "ING_002", "Amount": 10}]
+  }
+]

@@ -10,7 +10,7 @@ public class DataRepository : MonoBehaviour
     private Dictionary<string, IngredientData> ingredientData;
     private Dictionary<string, ToolData> toolData;
 
-    private void Start()
+    private void Awake()
     {
         Initialize();
     }
@@ -32,7 +32,7 @@ public class DataRepository : MonoBehaviour
         {
             return npcData[id];
         }
-        Debug.Log("¾Ë¸ÂÁö ¾Ê°Å³ª Á¸Á¦ÇÏÁö ¾ÊÀº Á¢±Ù ÀÔ´Ï´Ù.");
+        Debug.Log("ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½Ê°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½.");
         return null; ;
     }
     public OrderGroupData GetOrderGroup(string id)
@@ -42,7 +42,7 @@ public class DataRepository : MonoBehaviour
             return orderGroupData[id];
         }
 
-        Debug.Log("¾Ë¸ÂÁö ¾Ê°Å³ª Á¸Á¦ÇÏÁö ¾ÊÀº Á¢±Ù ÀÔ´Ï´Ù.");
+        Debug.Log("ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½Ê°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½.");
         return null;
     }
     public RecipeData GetRecipeData(string id)
@@ -52,7 +52,7 @@ public class DataRepository : MonoBehaviour
             return recipeData[id];
         }
 
-        Debug.Log("¾Ë¸ÂÁö ¾Ê°Å³ª Á¸Á¦ÇÏÁö ¾ÊÀº Á¢±Ù ÀÔ´Ï´Ù.");
+        Debug.Log("ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½Ê°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½.");
         return null;
     }
     public IngredientData GetIngredientData(string id)
@@ -62,7 +62,7 @@ public class DataRepository : MonoBehaviour
             return ingredientData[id];
         }
 
-        Debug.Log("¾Ë¸ÂÁö ¾Ê°Å³ª Á¸Á¦ÇÏÁö ¾ÊÀº Á¢±Ù ÀÔ´Ï´Ù.");
+        Debug.Log("ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½Ê°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½.");
         return null;
     }
     public ToolData GetTool(string id)
@@ -72,7 +72,7 @@ public class DataRepository : MonoBehaviour
             return toolData[id];
         }
 
-        Debug.Log("¾Ë¸ÂÁö ¾Ê°Å³ª Á¸Á¦ÇÏÁö ¾ÊÀº Á¢±Ù ÀÔ´Ï´Ù.");
+        Debug.Log("ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½Ê°Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô´Ï´ï¿½.");
         return null;
     }
 }

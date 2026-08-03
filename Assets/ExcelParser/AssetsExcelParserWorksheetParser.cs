@@ -66,6 +66,13 @@ namespace ExcelParser
                         }
                         break;
                     default:
+                        // 엑셀은 스타일만 있고 값이 비어있는 행도 XML에 남긴다.
+                        // 이런 행은 values가 비어(혹은 헤더 수보다 적어) 있으므로 건너뛴다.
+                        if (values.Count < worksheet.Headers.Count)
+                        {
+                            break;
+                        }
+
                         Dictionary<string, string> row = new();
 
                         for (int i = 0; i < worksheet.Headers.Count; i++)
