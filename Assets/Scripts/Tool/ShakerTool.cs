@@ -26,13 +26,8 @@ public class ShakerTool : ToolBase
     {
         originPos = transform.position;
         requiredCount = ShakerToolCount;
-        ActiveTool(TestActive, null, null, null);
     }
 
-    private bool TestActive()
-    {
-        return true;
-    }
     protected override void GrabHandler()
     {
         base.GrabHandler();

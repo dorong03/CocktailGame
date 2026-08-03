@@ -83,4 +83,9 @@ public class DragInput : MonoBehaviour
     {
         _collider = collider;
     }
+
+    public void Test()
+    {
+        dragItem = null;
+    }
 }

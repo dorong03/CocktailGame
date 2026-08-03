@@ -54,24 +54,6 @@ public class Bottle : MonoBehaviour
         drag.onDragDelta = HandleDrag;
         drag.onRelease = HandleRelease;
     }
-
-    
-    // TestCode
-    #region TestCode
-
-    public MixingCup testTarget;
-    
-    public void Start()
-    {
-        Init("test", 30, null, testTarget, DebugTest);
-    }
-    
-    public void DebugTest(string id, float test)
-    {
-        Debug.Log("Test");
-    }
-    #endregion
-    
     
     // 현재 스프라이트가 없어서 잠시 꺼둠
     public void Init(string ingredientId, float amount, Sprite sprite, IPourTarget target, Action<string, float> onPour)
@@ -90,6 +72,7 @@ public class Bottle : MonoBehaviour
     public void DeActivate()
     {
         drag.interactable = false;
+        drag.Test();
         gameObject.SetActive(false);
     }
 
@@ -127,6 +110,7 @@ public class Bottle : MonoBehaviour
         ResetTilt();
     }
     
+
     private void Tilt()
     {
         tilt = Mathf.Clamp(tilt + tiltSpeed * Time.deltaTime, 0f, maxTiltAngle);

@@ -4,24 +4,42 @@ using UnityEngine;
 
 public class CocktailMaker : MonoBehaviour
 {
-    private Order currentOrder;
     private List<Bottle> bottles;
+    private Dictionary<string, MixingCup> vesselByToolId;
+    private Cup cup;
+    private DataRepository repo;
+    private RecipeData currentRecipe;
+    private Dictionary<string, float> pouredAmounts;
+    private Action<MixResult> onComplete;
 
-    public Action<MixResult> OnMixCompleted;
+    [SerializeField] private Transform[] spawn;
 
-    public void StartMix(Order order)
-    {
-
-    }
-    public void CompleteMix()
-    {
-
-    }
-    public void Reset()
+    public void Start()
     {
         
     }
-    private MixResult CreateMixResult()
+
+    public void StartMix(string recipe, string tool, Action onComplete)
+    {
+        
+    }
+    public bool AllPouredAtLeastOnce()
+    {
+        return true;
+    }
+    public void ForceFinishMix()
+    {
+
+    }
+    public void Abort()
+    {
+
+    }
+    private void HandlePour(string ingredientId,float amount)
+    {
+
+    }
+    private MixResult BuildResult()
     {
         return null;
     }
