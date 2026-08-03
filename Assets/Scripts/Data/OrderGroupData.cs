@@ -3,5 +3,5 @@ using System.Collections.Generic;
 public class OrderGroupData
 {
     public string Id;
-    public List<string> RecipeId;
+    public List<string> RecipeIds;
 }
