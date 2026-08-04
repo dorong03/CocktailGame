@@ -35,7 +35,6 @@ public class Bottle : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private string ingredientId;
-    private float targetAmount;
     private float poured;
     private float tilt;
     private IPourTarget currentTarget;
@@ -56,12 +55,11 @@ public class Bottle : MonoBehaviour
     }
     
     // 현재 스프라이트가 없어서 잠시 꺼둠
-    public void Init(string ingredientId, float amount, Sprite sprite, IPourTarget target, Action<string, float> onPour)
+    public void Init(string ingredientId, Sprite sprite, IPourTarget target, Action<string, float> onPour)
     {
         gameObject.SetActive(true);
         drag.interactable = true;
         this.ingredientId = ingredientId;
-        targetAmount = amount;
         currentTarget = target;
         this.onPour = onPour;
         poured = 0f;
