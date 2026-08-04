@@ -4,43 +4,24 @@ using UnityEngine;
 
 public class CocktailMaker : MonoBehaviour
 {
+    // 얘는 칵테일 제조를 맡는 친구
+    // 어떤 칵테일을 만들고 언제 재료를 넣고 그런건 PlayStation 에서 결정할 예정
+
+    [SerializeField]
     private List<Bottle> bottles;
-    private Dictionary<string, MixingCup> vesselByToolId;
+    [SerializeField]
     private Cup cup;
-    private DataRepository repo;
-    private RecipeData currentRecipe;
-    private Dictionary<string, float> pouredAmounts;
+    
+    [SerializeField]
+    private DataRepository data;
+
+    private RecipeData recipe;
+    private Dictionary<string, float> pouredAmounts = new Dictionary<string, float>();
+
     private Action<MixResult> onComplete;
 
-    [SerializeField] private Transform[] spawn;
-
-    public void Start()
-    {
-        
-    }
-
-    public void StartMix(string recipe, string tool, Action onComplete)
-    {
-        
-    }
-    public bool AllPouredAtLeastOnce()
-    {
-        return true;
-    }
-    public void ForceFinishMix()
+    private void Awake()
     {
 
-    }
-    public void Abort()
-    {
-
-    }
-    private void HandlePour(string ingredientId,float amount)
-    {
-
-    }
-    private MixResult BuildResult()
-    {
-        return null;
     }
 }
