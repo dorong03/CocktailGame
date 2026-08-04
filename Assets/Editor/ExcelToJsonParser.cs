@@ -8,7 +8,7 @@ public class ExcelToJsonParser : EditorWindow
     private string selectedPath;
     private string savePath;
 
-    [MenuItem("Tools/¿¢¼¿ º¯È¯±â")]
+    [MenuItem("Tools/Excel to Json")]
     public static void WindowOpen()
     {
         GetWindow<ExcelToJsonParser>("Excel To Json");
@@ -16,16 +16,14 @@ public class ExcelToJsonParser : EditorWindow
 
     private void OnGUI()
     {
-        GUILayout.Label("Excel ¡æ Json º¯È¯±â", EditorStyles.boldLabel);
+        GUILayout.Label("Excel to Json File", EditorStyles.boldLabel);
 
         GUILayout.Space(10);
 
 
-        if (GUILayout.Button("¿¢¼¿ ÆÄÀÏ ¼±ÅÃ"))
+        if (GUILayout.Button("Select Excel file path"))
         {
-            selectedPath = EditorUtility.OpenFilePanel("xlsx ÆÄÀÏ ¼±ÅÃ", "", "xlsx");
-
-
+            selectedPath = EditorUtility.OpenFilePanel("xlsx file select", "", "xlsx");
 
         }
 
@@ -35,14 +33,10 @@ public class ExcelToJsonParser : EditorWindow
         }
 
         GUILayout.Space(10);
-
-        // ÀúÀå Æú´õ ¼±ÅÃ
-        if (GUILayout.Button("ÀúÀå Æú´õ ¼±ÅÃ"))
+        
+        if (GUILayout.Button("Select Save Path"))
         {
-            savePath = EditorUtility.OpenFolderPanel("ÀúÀåÇÒ Æú´õ ¼±ÅÃ", "", "");
-
-
-
+            savePath = EditorUtility.OpenFolderPanel("Save file path", "", "");
         }
 
         if (!string.IsNullOrEmpty(savePath))
@@ -54,11 +48,11 @@ public class ExcelToJsonParser : EditorWindow
 
         GUI.backgroundColor = Color.green;
 
-        if (GUILayout.Button("º¯È¯ÇÏ±â", GUILayout.Height(35)))
+        if (GUILayout.Button("Parse", GUILayout.Height(35)))
         {
             if (string.IsNullOrEmpty(selectedPath))
             {
-                EditorUtility.DisplayDialog("¿À·ù", "¿¢¼¿ ÆÄÀÏÀ» ¼±ÅÃÇÏ¼¼¿ä.", "È®ÀÎ");
+                EditorUtility.DisplayDialog("Error", "select path is empty.", "È®ï¿½ï¿½");
 
 
 
@@ -67,7 +61,7 @@ public class ExcelToJsonParser : EditorWindow
 
             if (string.IsNullOrEmpty(savePath))
             {
-                EditorUtility.DisplayDialog("¿À·ù", "ÀúÀå Æú´õ¸¦ ¼±ÅÃÇÏ¼¼¿ä.", "È®ÀÎ");
+                EditorUtility.DisplayDialog("ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½.", "È®ï¿½ï¿½");
 
 
 
@@ -106,7 +100,7 @@ public class ExcelToJsonParser : EditorWindow
 
                 AssetDatabase.Refresh();
 
-                EditorUtility.DisplayDialog("¿Ï·á", "JSON º¯È¯ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.", "È®ÀÎ");
+                EditorUtility.DisplayDialog("ï¿½Ï·ï¿½", "JSON ï¿½ï¿½È¯ï¿½ï¿½ ï¿½Ï·ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½.", "È®ï¿½ï¿½");
 
 
 
@@ -115,7 +109,7 @@ public class ExcelToJsonParser : EditorWindow
             {
                 Debug.LogException(e);
 
-                EditorUtility.DisplayDialog("¿À·ù", e.Message, "È®ÀÎ");
+                EditorUtility.DisplayDialog("ï¿½ï¿½ï¿½ï¿½", e.Message, "È®ï¿½ï¿½");
 
 
 

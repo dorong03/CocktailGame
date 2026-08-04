@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DataRepository : MonoBehaviour
 {
+    public static DataRepository Instance { get; private set; }
+
     private Dictionary<string, NpcData> npcData;
     private Dictionary<string, OrderGroupData> orderGroupData;
     private Dictionary<string, RecipeData> recipeData;
@@ -12,6 +14,16 @@ public class DataRepository : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Initialize();
     }
 
@@ -30,49 +42,49 @@ public class DataRepository : MonoBehaviour
     {
         if (npcData.TryGetValue(id, out var npc))
         {
-            return npcData[id];
+            return npc;
         }
-        Debug.Log("�˸��� �ʰų� �������� ���� ���� �Դϴ�.");
-        return null; ;
+        Debug.Log("일치하는 항목이 없거나 존재하지 않는 ID입니다.");
+        return null;
     }
+
     public OrderGroupData GetOrderGroup(string id)
     {
         if (orderGroupData.TryGetValue(id, out var order))
         {
-            return orderGroupData[id];
+            return order;
         }
-
-        Debug.Log("�˸��� �ʰų� �������� ���� ���� �Դϴ�.");
+        Debug.Log("일치하는 항목이 없거나 존재하지 않는 ID입니다.");
         return null;
     }
+
     public RecipeData GetRecipeData(string id)
     {
         if (recipeData.TryGetValue(id, out var recipe))
         {
-            return recipeData[id];
+            return recipe;
         }
-
-        Debug.Log("�˸��� �ʰų� �������� ���� ���� �Դϴ�.");
+        Debug.Log("일치하는 항목이 없거나 존재하지 않는 ID입니다.");
         return null;
     }
+
     public IngredientData GetIngredientData(string id)
     {
         if (ingredientData.TryGetValue(id, out var ingredient))
         {
-            return ingredientData[id];
+            return ingredient;
         }
-
-        Debug.Log("�˸��� �ʰų� �������� ���� ���� �Դϴ�.");
+        Debug.Log("일치하는 항목이 없거나 존재하지 않는 ID입니다.");
         return null;
     }
+
     public ToolData GetTool(string id)
     {
         if (toolData.TryGetValue(id, out var tool))
         {
-            return toolData[id];
+            return tool;
         }
-
-        Debug.Log("�˸��� �ʰų� �������� ���� ���� �Դϴ�.");
+        Debug.Log("일치하는 항목이 없거나 존재하지 않는 ID입니다.");
         return null;
     }
 }
