@@ -16,7 +16,7 @@ public class Cup : MonoBehaviour, IPourTarget
     private Vector2 homePos;
 
     private Action onSubmit;
-    private Action<Vector2> onThrowRelease;
+    private Action<Vector2> onCupLand;
 
     // 잔이 날라가는 속도와 줄어드는 속도 크기
     private const float MaxSpeed = 8f;
@@ -53,6 +53,7 @@ public class Cup : MonoBehaviour, IPourTarget
     {
         if (mode == CupMode.Submit)
         {
+            //되돌리기
             if (drag.TotalDragDistance < 0.25f)
             {
                 onSubmit?.Invoke();
@@ -61,10 +62,10 @@ public class Cup : MonoBehaviour, IPourTarget
         }
         else if (mode == CupMode.Throwable)
         {
+            //던지기
             Vector2 offset = (Vector2)drag.CurrentWorldPos - homePos;
             offset = -offset;
             StartCoroutine(ThrowRoutine(offset));
-            onThrowRelease?.Invoke(offset);
         }
     }
 
@@ -84,6 +85,7 @@ public class Cup : MonoBehaviour, IPourTarget
             speed -= Deceleration * Time.deltaTime;
             yield return null;
         }
+        onCupLand?.Invoke(transform.position);
     }
     
     public void SetSubmitHandler(Action onSubmit)
@@ -93,7 +95,7 @@ public class Cup : MonoBehaviour, IPourTarget
 
     public void SetThrowHandler(Action<Vector2> onThrowRelease)
     {
-        this.onThrowRelease = onThrowRelease;
+        this.onCupLand = onThrowRelease;
     }
 
     public void ReturnHome()
