@@ -38,8 +38,8 @@ public abstract class ToolBase : MonoBehaviour
 
     protected virtual void GrabHandler()
     {
-        if (started) return;
-        if (canStart != null && !canStart())
+        if (started || canStart == null) return;
+        if (!canStart())
         {
             onBlocked?.Invoke();
             return;
