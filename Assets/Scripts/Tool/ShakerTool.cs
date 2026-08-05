@@ -26,6 +26,7 @@ public class ShakerTool : ToolBase
     {
         originPos = transform.position;
         requiredCount = ShakerToolCount;
+        Hide();
     }
 
     protected override void GrabHandler()
@@ -81,5 +82,17 @@ public class ShakerTool : ToolBase
     public override void ResetMotion()
     {
         transform.position = originPos;
+    }
+
+    public override void Show()
+    {
+        gameObject.SetActive(true);
+        head.gameObject.SetActive(true);
+    }
+    
+    public override void Hide()
+    {
+        gameObject.SetActive(false);
+        head.gameObject.SetActive(false);
     }
 }

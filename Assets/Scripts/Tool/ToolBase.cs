@@ -74,8 +74,8 @@ public abstract class ToolBase : MonoBehaviour
      */
     public void Abort()
     {
-        if (!started) return;
         count = 0;
+        started = false;
         drag.interactable = false;
         ResetMotion();
     }
@@ -89,4 +89,8 @@ public abstract class ToolBase : MonoBehaviour
     public abstract void HandleDelta(Vector2 delta);
     
     public abstract void ResetMotion();
+
+    public virtual void Show() { }
+
+    public virtual void Hide() { }
 }

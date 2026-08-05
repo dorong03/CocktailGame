@@ -4,80 +4,36 @@ using UnityEngine;
 
 public class CocktailMaker : MonoBehaviour
 {
-    // 얘는 칵테일 제조를 맡는 친구
-    // 어떤 칵테일을 만들고 언제 재료를 넣고 그런건 PlayStation 에서 결정할 예정
+    // 액체 집계 담당
+    // 어디에 붓는지(Cup / MixingCup)는 PlayerStation 이 정해서 IPourTarget 으로 넘겨줌
 
     [SerializeField]
     private List<Bottle> bottles;
-    [SerializeField]
-    private Cup cup;
-    [SerializeField] 
-    private MixingCup shaker;
-    [SerializeField] 
-    private MixingCup barSpoon;
-    
-    private DataRepository data;
 
     private RecipeData currentRecipe;
+    private IPourTarget currentTarget;
     private Dictionary<string, float> pouredAmounts = new Dictionary<string, float>();
 
     private Action onMixReady;
     private Action<MixResult> onComplete;
 
-    private void Start()
-    {
-        data = DataRepository.Instance;
-        if (data == null)
-        {
-            Debug.LogError("DataRepository is not created");
-        }
-    }
-
-    public void StartMix(RecipeData recipe, string tool, Action onMixReady, Action<MixResult> onComplete)
+    public void StartMix(RecipeData recipe, IPourTarget target, Action onMixReady, Action<MixResult> onComplete)
     {
         currentRecipe = recipe;
-        pouredAmounts.Clear();
+        currentTarget = target;
         this.onMixReady = onMixReady;
         this.onComplete = onComplete;
-        
-        IPourTarget target = null;
-        if (string.IsNullOrEmpty(tool))
-        {
-            target = cup;
-            cup.SetMode(CupMode.Submit);
-            cup.SetSubmitHandler(TryFinishCup);
-        }
-        else
-        {
-            switch (tool)
-            {
-                case "TOOL_000":
-                    target = shaker;
-                    break;
-                case "TOOL_001":
-                    target = barSpoon;
-                    break;
-                default:
-                    Debug.LogError("Unknown tool: " + tool);
-                    target = null;
-                    break;
-            }
-        }
-        
+        pouredAmounts.Clear();
+
         for (int i = 0; i < recipe.Ingredients.Count; i++)
         {
             IngredientAmount ingre = recipe.Ingredients[i];
             pouredAmounts.Add(ingre.IngredientId, 0);
+            bottles[i].Show();
             bottles[i].Init(ingre.IngredientId, null, target, HandlePour);
         }
     }
 
-    private void TryFinishCup()
-    {
-        if (!AllPouredAtLeastOnce()) return;
-        FinishMix();
-    }
-    
     public bool AllPouredAtLeastOnce()
     {
         foreach (var amount in pouredAmounts)
@@ -90,14 +46,19 @@ public class CocktailMaker : MonoBehaviour
         return true;
     }
 
-    private void HandlePour(string ingredientId, float amount)
+    // 부은 총량 / 필요 총량. 도구 완료 후 MixingCup -> Cup 연출에도 사용
+    public float ComputeFillRatio()
     {
-        pouredAmounts[ingredientId] += amount;
-        if (!string.IsNullOrEmpty(currentRecipe.ToolId) && AllPouredAtLeastOnce())
+        if (currentRecipe == null) return 0f;
+
+        float poured = 0f;
+        float required = 0f;
+        foreach (var ingre in currentRecipe.Ingredients)
         {
-            onMixReady?.Invoke();
-            onMixReady = null;
+            poured += pouredAmounts[ingre.IngredientId];
+            required += ingre.Amount;
         }
+        return required > 0f ? Mathf.Clamp01(poured / required) : 0f;
     }
 
     public void FinishMix()
@@ -105,7 +66,20 @@ public class CocktailMaker : MonoBehaviour
         MixResult mixResult = GetBuildResult();
         onComplete?.Invoke(mixResult);
     }
-    
+
+    private void HandlePour(string ingredientId, float amount)
+    {
+        pouredAmounts[ingredientId] += amount;
+
+        if(currentTarget is Cup) currentTarget?.SetFill(ComputeFillRatio(), Color.cyan);
+
+        if (!string.IsNullOrEmpty(currentRecipe.ToolId) && AllPouredAtLeastOnce())
+        {
+            onMixReady?.Invoke();
+            onMixReady = null;
+        }
+    }
+
     private MixResult GetBuildResult()
     {
         MixResult mixResult = new MixResult();
@@ -119,13 +93,21 @@ public class CocktailMaker : MonoBehaviour
         return mixResult;
     }
 
-    public void Abort()
+    // 주문이 끝났을때 병 상태 초기화 + 숨김
+    public void HideBottles()
     {
         foreach (var bottle in bottles)
         {
-            bottle.DeActivate();   
+            bottle.DeActivate();
+            bottle.Hide();
         }
+    }
+
+    public void Abort()
+    {
         pouredAmounts.Clear();
         currentRecipe = null;
+        currentTarget = null;
+        HideBottles();
     }
 }

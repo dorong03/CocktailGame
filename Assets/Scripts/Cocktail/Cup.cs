@@ -19,8 +19,8 @@ public class Cup : MonoBehaviour, IPourTarget
     private Action<Vector2> onCupLand;
 
     // 잔이 날라가는 속도와 줄어드는 속도 크기
-    private const float MaxSpeed = 8f;
-    private const float Deceleration = 12f;
+    private const float MaxSpeed = 10f;
+    private const float Deceleration = 11f;
     
     // 술이 차오르는 픽셀 기준
     const int pixelStep = 8;
@@ -30,6 +30,7 @@ public class Cup : MonoBehaviour, IPourTarget
         drag = GetComponent<DragInput>();
         homePos = transform.position;
         drag.onRelease = HandleRelease;
+        Hide();
     }
     
     public void SetMode(CupMode mode)
@@ -120,5 +121,17 @@ public class Cup : MonoBehaviour, IPourTarget
         Vector3 scale = fillRenderer.transform.localScale;
         scale.y = Mathf.Max(1f / pixelStep, steppedRatio);
         fillRenderer.transform.localScale = scale;
+    }
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+        SetFill(0f, Color.white);
+        transform.position = homePos;
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }

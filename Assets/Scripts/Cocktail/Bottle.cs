@@ -52,12 +52,12 @@ public class Bottle : MonoBehaviour
         drag.onGrab = HandleGrab;
         drag.onDragDelta = HandleDrag;
         drag.onRelease = HandleRelease;
+        Hide();
     }
     
     // 현재 스프라이트가 없어서 잠시 꺼둠
     public void Init(string ingredientId, Sprite sprite, IPourTarget target, Action<string, float> onPour)
     {
-        gameObject.SetActive(true);
         drag.interactable = true;
         this.ingredientId = ingredientId;
         currentTarget = target;
@@ -70,10 +70,25 @@ public class Bottle : MonoBehaviour
     public void DeActivate()
     {
         drag.interactable = false;
+        ingredientId = null;
+        currentTarget = null;
+        onPour = null;
+        poured = 0f;
+        tilt = 0f;
+        transform.position = homePos;
         drag.Test();
-        gameObject.SetActive(false);
     }
 
+    public void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+    
     private void Update()
     {
         if (!drag.IsGrabbed) return;

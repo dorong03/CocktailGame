@@ -29,7 +29,8 @@ public class MixingCup : MonoBehaviour, IPourTarget
         pourCoroutine = StartCoroutine(PourCoroutine(cup, ratio, duration, color, onDone));
     }
     
-    // duration 에 비례해서 액체가 줄어들고 컵의 액체는 늘어나게 연출
+    // duration 에 비례해서 컵의 액체가 늘어나게 연출
+    // (도구 용기 자체는 붓는 동안 fill 연출을 안 하므로 여기서도 건드리지 않음)
     private IEnumerator PourCoroutine(Cup cup, float ratio, float duration , Color color ,Action onDone)
     {
         float timer = 0;
@@ -38,11 +39,9 @@ public class MixingCup : MonoBehaviour, IPourTarget
             timer += Time.deltaTime;
             float percent = timer / duration;
             cup.SetFill(ratio * percent, color);
-            SetFill(ratio * (1 - percent), color);
             yield return null;
         }
         cup.SetFill(ratio, color);
-        SetFill(0f, color);
         pourCoroutine = null;
         onDone?.Invoke();
     }

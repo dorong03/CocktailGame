@@ -13,7 +13,7 @@ public class TestGM : MonoBehaviour
         NpcData npc = orderService.PickNpc();
         RecipeData recipe = orderService.PickRecipe(npc);
         Seat seat = orderService.PickSeat(seats);
-
+        
         station.BeginOrder(recipe, seat, PrintGrade);
     }
 

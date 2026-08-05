@@ -21,6 +21,7 @@ public class BarSpoonTool : ToolBase
         originPos = transform.position;
         requiredCount = BarSpoonToolCount;
         drag.SetCollider(mixingCupCollider);
+        Hide();
     }
     
     protected override void GrabHandler()
@@ -77,5 +78,15 @@ public class BarSpoonTool : ToolBase
         transform.position = originPos;
         hasLastAngle = false;
         accumulatedAngle = 0f;
+    }
+
+    public override void Show()
+    {
+        gameObject.SetActive(true);
+    }
+
+    public override void Hide()
+    {
+        gameObject.SetActive(false);
     }
 }

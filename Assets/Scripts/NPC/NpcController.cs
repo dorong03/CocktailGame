@@ -1,10 +1,6 @@
 using System;
 using System.Collections;
-using Unity.Android.Gradle;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
-using static UnityEngine.GraphicsBuffer;
 
 public class NpcController : MonoBehaviour
 {
@@ -31,7 +27,7 @@ public class NpcController : MonoBehaviour
         Clear();
     }
 
-    // npc °¡ Æ¯Á¤ ÀÚ¸®¿¡ ³ª¿À´Â ¿¬Ãâ
+    // npc ï¿½ï¿½ Æ¯ï¿½ï¿½ ï¿½Ú¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     public void SpawnNpc(NpcData npc, Seat seat, Action onArrived)
     {
         //gameObject.SetActive(true);
@@ -40,7 +36,7 @@ public class NpcController : MonoBehaviour
         onArrived?.Invoke();
     }
 
-    //¶°³¯¶§
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     public void Depart(Action onGone)
     {
         transform.position = seat.transform.position + Vector3.up * moveDistance;
@@ -78,7 +74,7 @@ public class NpcController : MonoBehaviour
         isMoving = false;
     }
 
-    // ÃÊ±âÈ­
+    // ï¿½Ê±ï¿½È­
     public void Clear()
     {
         //gameObject.SetActive(false);
