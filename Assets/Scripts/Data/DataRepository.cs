@@ -12,6 +12,8 @@ public class DataRepository : MonoBehaviour
     private Dictionary<string, IngredientData> ingredientData;
     private Dictionary<string, ToolData> toolData;
 
+    private List<string> npcKeyList;
+
     private void Awake()
     {
         if (Instance == null)
@@ -36,6 +38,8 @@ public class DataRepository : MonoBehaviour
         recipeData = dataLoader.LoadJsonData<RecipeData>("JsonData/Recipe").ToDictionary(x => x.Id);
         ingredientData = dataLoader.LoadJsonData<IngredientData>("JsonData/Ingredient").ToDictionary(x => x.Id);
         toolData = dataLoader.LoadJsonData<ToolData>("JsonData/Tool").ToDictionary(x => x.Id);
+
+        npcKeyList = new List<string>(npcData.Keys);
     }
 
     public NpcData GetNpc(string id)
@@ -46,6 +50,11 @@ public class DataRepository : MonoBehaviour
         }
         Debug.Log("일치하는 항목이 없거나 존재하지 않는 ID입니다.");
         return null;
+    }
+
+    public List<string> GetNpcKey()
+    {
+        return npcKeyList;
     }
 
     public OrderGroupData GetOrderGroup(string id)
