@@ -15,7 +15,7 @@ public class ToolController : MonoBehaviour
 
     private ToolBase currentTool;
 
-    public void Arm(string tool, Func<bool> canStart,Action onBlocked, Action onStarted, Action onComplete)
+    public void BeginStart(string tool, Func<bool> canStart,Action onBlocked, Action onStarted, Action onComplete)
     {
         currentTool = GetToolById(tool);
         currentTool.ActiveTool(canStart, onBlocked, onStarted, onComplete);
@@ -30,7 +30,7 @@ public class ToolController : MonoBehaviour
             case "TOOL_001":
                 return barSpoon;
             default:
-                Debug.LogError($"Á¸ÀçÇÏÁö ¾Ê´Â µµ±¸ ¾ÆÀÌµð -> {id}");
+                Debug.LogError($"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê´ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ -> {id}");
                 return null;
         }
     }

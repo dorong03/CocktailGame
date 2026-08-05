@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 using ExcelParser;
@@ -6,7 +7,7 @@ using ExcelParser;
 public class ExcelToJsonParser : EditorWindow
 {
     private string selectedPath;
-    private string savePath;
+    private static readonly string SavePath = Path.Combine(Application.dataPath, "Resources", "JsonData");
 
     [MenuItem("Tools/Excel to Json")]
     public static void WindowOpen()
@@ -20,11 +21,9 @@ public class ExcelToJsonParser : EditorWindow
 
         GUILayout.Space(10);
 
-
         if (GUILayout.Button("Select Excel file path"))
         {
             selectedPath = EditorUtility.OpenFilePanel("xlsx file select", "", "xlsx");
-
         }
 
         if (!string.IsNullOrEmpty(selectedPath))
@@ -33,16 +32,8 @@ public class ExcelToJsonParser : EditorWindow
         }
 
         GUILayout.Space(10);
-        
-        if (GUILayout.Button("Select Save Path"))
-        {
-            savePath = EditorUtility.OpenFolderPanel("Save file path", "", "");
-        }
 
-        if (!string.IsNullOrEmpty(savePath))
-        {
-            EditorGUILayout.HelpBox(savePath, MessageType.None);
-        }
+        EditorGUILayout.HelpBox($"저장 경로 (고정): {SavePath}", MessageType.Info);
 
         GUILayout.Space(20);
 
@@ -52,20 +43,13 @@ public class ExcelToJsonParser : EditorWindow
         {
             if (string.IsNullOrEmpty(selectedPath))
             {
-                EditorUtility.DisplayDialog("Error", "select path is empty.", "Ȯ��");
-
-
-
+                EditorUtility.DisplayDialog("오류", "엑셀 파일 경로를 선택해주세요.", "확인");
                 return;
             }
 
-            if (string.IsNullOrEmpty(savePath))
+            if (!Directory.Exists(SavePath))
             {
-                EditorUtility.DisplayDialog("����", "���� ������ �����ϼ���.", "Ȯ��");
-
-
-
-                return;
+                Directory.CreateDirectory(SavePath);
             }
 
             try
@@ -74,7 +58,6 @@ public class ExcelToJsonParser : EditorWindow
                 WorksheetParser worksheetParser = new WorksheetParser();
                 SharedStringParser sharedStringParser = new SharedStringParser();
                 JsonWriter jsonWriter = new JsonWriter();
-
 
                 SharedStringTable sharedStringTable =
                     sharedStringParser.Parse(selectedPath);
@@ -94,25 +77,18 @@ public class ExcelToJsonParser : EditorWindow
                         continue;
 
                     jsonWriter.ConvertExcelToJsonFile(
-                        savePath,
+                        SavePath,
                         worksheet);
                 }
 
                 AssetDatabase.Refresh();
 
-                EditorUtility.DisplayDialog("�Ϸ�", "JSON ��ȯ�� �Ϸ�Ǿ����ϴ�.", "Ȯ��");
-
-
-
+                EditorUtility.DisplayDialog("완료", "JSON 변환이 완료되었습니다.", "확인");
             }
             catch (System.Exception e)
             {
                 Debug.LogException(e);
-
-                EditorUtility.DisplayDialog("����", e.Message, "Ȯ��");
-
-
-
+                EditorUtility.DisplayDialog("오류", e.Message, "확인");
             }
         }
 

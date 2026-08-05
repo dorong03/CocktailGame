@@ -118,4 +118,14 @@ public class CocktailMaker : MonoBehaviour
         }
         return mixResult;
     }
+
+    public void Abort()
+    {
+        foreach (var bottle in bottles)
+        {
+            bottle.DeActivate();   
+        }
+        pouredAmounts.Clear();
+        currentRecipe = null;
+    }
 }
