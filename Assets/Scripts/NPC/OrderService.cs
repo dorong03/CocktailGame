@@ -7,14 +7,14 @@ public class OrderService : MonoBehaviour
 {
     private DataRepository repo;
     private System.Random rand;
-    [SerializeField]private Seat[] seats;
+    
+    [SerializeField]
+    private Seat[] seats;
 
     public void Start()
     {
         repo = DataRepository.Instance;
         rand = new System.Random();
-
-        //TestSeat();
     }
     public NpcData PickNpc()
     {
@@ -45,34 +45,4 @@ public class OrderService : MonoBehaviour
 
         return repo.GetRecipeData(recipeId);
     }
-    #region Test
-    private void TestSeat()
-    {
-        for (int i = 0; i < 10; i++)
-        {
-            Seat seat = PickSeat(seats);
-
-            if (seat != null)
-            {
-                Debug.Log($"{i + 1}번째 : {seat.name}");
-            }
-        }
-    }
-
-    private void Update()
-    {
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            TestPickRecipe();
-        }
-    }
-
-    private void TestPickRecipe()
-    {
-        NpcData npc = PickNpc();
-        RecipeData recipe = PickRecipe(npc);
-
-        Debug.Log($"손님 : {npc.Name} + 주문 : {recipe.Name}+ 레시피 ID : {recipe.Id}");
-    }
-    #endregion
 }
