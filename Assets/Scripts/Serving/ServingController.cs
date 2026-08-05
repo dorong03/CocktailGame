@@ -3,16 +3,17 @@ using UnityEngine;
 
 public class ServingController : MonoBehaviour
 {
-    // ´øÁö´Â ÄÅ
+    // ì„œë¹™í•  ì”
+    [SerializeField]
     private Cup cup;
 
-    // npc ÀÚ¸® ¾Õ¿¡ ÀÖ´Â ½ÃÆ®
+    // NPC ìë¦¬(ì†ë‹˜ì´ ì•‰ì€ ì‹œíŠ¸)
     private Seat targetSeat;
 
-    // ÆÇÁ¤ÀÌ ¿Ï·á µÆÀ»¶§ ½ÇÇàÇÒ ¸Ş¼Òµå
+    // ì„œë¹™ì´ ì™„ë£Œëì„ ë•Œ ì‹¤í–‰í•  ì½œë°±
     private Action<Grade> onComplete;
 
-    // ¿ÜºÎ¿¡¼­ ¼­ºùÀ» ½ÃÀÛÇÏ´Â ¸Ş¼Òµå
+    // ì™¸ë¶€ì—ì„œ ì„œë¹™ì„ ì‹œì‘í•  ë•Œ í˜¸ì¶œí•˜ëŠ” ë©”ì†Œë“œ
     public void StartServing(Seat seat, Action<Grade> onComplete)
     {
         targetSeat = seat;
@@ -21,7 +22,7 @@ public class ServingController : MonoBehaviour
         cup.SetThrowHandler(CupLandHandler);
     }
 
-    // ÁßÁöÇÏ´Â ¸Ş¼Òµå pause
+    // ì„œë¹™ì„ ì¤‘ë‹¨í•  ë•Œ í˜¸ì¶œí•˜ëŠ” ë©”ì†Œë“œ
     public void Abort()
     {
         cup.SetMode(CupMode.Locked);
@@ -29,7 +30,7 @@ public class ServingController : MonoBehaviour
         onComplete = null;
     }
 
-    //ÆÇÁ¤
+    // ì”ì´ ë˜ì ¸ì§„ ë’¤ ì°©ì§€ íŒì •
     private void CupLandHandler(Vector2 cupPosition)
     {
         Grade grade = targetSeat.EvaluateLanding(cupPosition);

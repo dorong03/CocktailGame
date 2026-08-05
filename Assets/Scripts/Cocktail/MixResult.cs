@@ -4,5 +4,5 @@ using System;
 
 public class MixResult
 {
-    public List<IngredientResult> Ingredients;
+    public List<IngredientResult> Ingredients = new List<IngredientResult>();
 }

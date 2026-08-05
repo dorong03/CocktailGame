@@ -21,17 +21,8 @@ public class BarSpoonTool : ToolBase
         originPos = transform.position;
         requiredCount = BarSpoonToolCount;
         drag.SetCollider(mixingCupCollider);
-        
-        // Test 용 코드
-        ActiveTool(TestReturn, null, null, null);
     }
-
-    //Test 용 코드
-    private bool TestReturn()
-    {
-        return true;
-    }
-
+    
     protected override void GrabHandler()
     {
         base.GrabHandler();
