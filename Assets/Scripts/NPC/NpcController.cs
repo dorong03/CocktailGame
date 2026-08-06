@@ -32,7 +32,6 @@ public class NpcController : MonoBehaviour
         transform.position = seat.transform.position;
         if(routine != null) StopCoroutine(routine);
         routine = StartCoroutine(PositionUp(onArrived));
-        onArrived?.Invoke();
     }
     
     public void Depart(Action onGone)

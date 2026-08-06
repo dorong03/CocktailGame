@@ -34,6 +34,11 @@ public class DragInput : MonoBehaviour
         _camera = Camera.main;
     }
 
+    private void OnDisable()
+    {
+        CancleGrab();
+    }
+
     private void Update()
     {
         Vector2 screenPos = Mouse.current.position.ReadValue();
@@ -71,7 +76,7 @@ public class DragInput : MonoBehaviour
             }
         }
     }
-
+    
     private void CancleGrab()
     {
         IsGrabbed = false;

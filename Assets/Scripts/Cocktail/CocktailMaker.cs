@@ -69,6 +69,7 @@ public class CocktailMaker : MonoBehaviour
 
     private void HandlePour(string ingredientId, float amount)
     {
+        if (!pouredAmounts.TryGetValue(ingredientId, out float value)) return;
         pouredAmounts[ingredientId] += amount;
 
         if(currentTarget is Cup) currentTarget?.SetFill(ComputeFillRatio(), Color.cyan);
