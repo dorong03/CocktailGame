@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -69,10 +69,20 @@ public class CocktailMaker : MonoBehaviour
 
     private void HandlePour(string ingredientId, float amount)
     {
+        
         if (!pouredAmounts.TryGetValue(ingredientId, out float value)) return;
         pouredAmounts[ingredientId] += amount;
+        #region 테스트코드 추후 삭제
+        Dictionary<string, float> dic = new();
+        
+        foreach(var a in currentRecipe.Ingredients)
+        {
+            dic[a.IngredientId] = a.Amount;
+        }
+        Debug.Log($"{ingredientId} 투입량: {pouredAmounts[ingredientId]} / {dic[ingredientId]}");
 
-        if(currentTarget is Cup) currentTarget?.SetFill(ComputeFillRatio(), Color.cyan);
+        #endregion
+        if (currentTarget is Cup) currentTarget?.SetFill(ComputeFillRatio(), Color.cyan);
 
         if (!string.IsNullOrEmpty(currentRecipe.ToolId) && AllPouredAtLeastOnce())
         {

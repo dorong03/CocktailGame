@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -70,7 +70,10 @@ public class GameManager : MonoBehaviour
     private void OnStationComplete(MixResult mixResult,Grade grade)
     {
         ChangePhase(GamePhase.Processing);
-        // ScoreCalcutae 써서 mixResult 랑 grade 를 통해 점수 내서 추가하기
+        float accuracy = ScoreCalculator.GetMixAccuracy(currentOrder.Recipe, mixResult);
+        int currentRecipeScore = ScoreCalculator.GetFinalScore(currentOrder.Recipe.BaseScore, accuracy);
+        Debug.Log($"이번에 획득한 점수는 {currentRecipeScore} 점 입니다.");
+        Debug.Log($"레시피 아이디: {currentOrder.Recipe.Id}, 기본 점수: {currentOrder.Recipe.BaseScore}, 정확도: {accuracy}");
         npcController.Depart(NextRound);
     }
 
