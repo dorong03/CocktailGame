@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -15,10 +16,17 @@ public class GameManager : MonoBehaviour
     private GameTimer timer;
     [SerializeField] 
     private PlayerStationController station;
+
+    public event Action<GamePhase> OnPhaseChange;
+
+    public void Start()
+    {
+        GoToMainMenu();
+    }
     
     public void GoToMainMenu()
     {
-        phase = GamePhase.MainMenu;
+        ChangePhase(GamePhase.MainMenu);
     }
     
     public void StartGame()
@@ -42,26 +50,26 @@ public class GameManager : MonoBehaviour
         station.Abort();
         npcController.Clear();
         Debug.Log("Game Ended!!!");
-        phase = GamePhase.Result;
+        ChangePhase(GamePhase.Result);
     }
 
     private void NextRound()
     {
-        phase = GamePhase.Ready;
+        ChangePhase(GamePhase.Ready);
         CreateNewOrder();
         npcController.SpawnNpc(currentOrder.NpcData, currentOrder.Seat, OnNpcArrived);
     }
 
     private void OnNpcArrived()
     {
-        phase = GamePhase.Ordering;
+        ChangePhase(GamePhase.Ordering);
         timer.Begin();
         station.BeginOrder(currentOrder.Recipe, currentOrder.Seat, OnStationComplete);
     }
 
     private void OnStationComplete(MixResult mixResult,Grade grade)
     {
-        phase = GamePhase.Processing;
+        ChangePhase(GamePhase.Processing);
         // ScoreCalcutae 써서 mixResult 랑 grade 를 통해 점수 내서 추가하기
         npcController.Depart(NextRound);
     }
@@ -69,5 +77,11 @@ public class GameManager : MonoBehaviour
     private void HandleTimeOver()
     {
         EndGame();
+    }
+
+    private void ChangePhase(GamePhase newPhase)
+    {
+        phase = newPhase;
+        OnPhaseChange?.Invoke(phase);
     }
 }

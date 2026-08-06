@@ -5,9 +5,10 @@ public class GameTimer : MonoBehaviour
 {
     private float remaining;
     private bool isRunning;
-    private float maxTime;
+    public float MaxTime { get; private set; }
 
     public event Action OnTimeOver;
+    public event Action<float> OnTimeTick;
 
     private void Update()
     {
@@ -18,7 +19,7 @@ public class GameTimer : MonoBehaviour
         }
 
         remaining -= Time.deltaTime;
-
+        OnTimeTick?.Invoke(remaining);
         if (remaining <= 0)
         {
             remaining = 0;
@@ -30,7 +31,7 @@ public class GameTimer : MonoBehaviour
     public void Prepare(float second)
     {
         isRunning = false;
-        maxTime = second;
+        MaxTime = second;
         remaining = second;
     }
 
@@ -43,9 +44,9 @@ public class GameTimer : MonoBehaviour
     {
 
         remaining += second;
-        if (remaining > maxTime)
+        if (remaining > MaxTime)
         {
-            remaining = maxTime;
+            remaining = MaxTime;
         }
     }
 
