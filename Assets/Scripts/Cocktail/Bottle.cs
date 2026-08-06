@@ -35,7 +35,6 @@ public class Bottle : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     private string ingredientId;
-    private float poured;
     private float tilt;
     private IPourTarget currentTarget;
     private Action<string, float> onPour;
@@ -62,7 +61,6 @@ public class Bottle : MonoBehaviour
         this.ingredientId = ingredientId;
         currentTarget = target;
         this.onPour = onPour;
-        poured = 0f;
         tilt = 0f;
         // spriteRenderer.sprite = sprite;
     }
@@ -73,7 +71,6 @@ public class Bottle : MonoBehaviour
         ingredientId = null;
         currentTarget = null;
         onPour = null;
-        poured = 0f;
         tilt = 0f;
         transform.position = homePos;
         drag.Test();

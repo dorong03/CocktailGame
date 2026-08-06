@@ -24,7 +24,7 @@ public class OrderService : MonoBehaviour
         return data;
     }
 
-    public Seat PickSeat(Seat[] seats)
+    public Seat PickSeat()
     {
         if (seats == null || seats.Length == 0) return null;
 
