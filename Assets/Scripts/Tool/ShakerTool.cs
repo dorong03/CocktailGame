@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -20,6 +20,8 @@ public class ShakerTool : ToolBase
     private Transform head;
     [SerializeField]
     private Transform targetParent;
+    [SerializeField]
+    private Transform homeTargetParent;
 
 
     public void Start()
@@ -53,7 +55,7 @@ public class ShakerTool : ToolBase
     {
         // 뚜껑이 열리는 코드
         // 추후 애니메이션 구현
-        head.SetParent(null);
+        head.SetParent(homeTargetParent);
         head.position = homeHeadPos.position;
         yield return null;
     }
