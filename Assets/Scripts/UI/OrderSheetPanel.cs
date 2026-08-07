@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class RecipePanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class OrderSheetPanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     public enum PanelState { Peek, Moving, Expanded }
 
@@ -15,11 +15,12 @@ public class RecipePanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private PanelState state = PanelState.Peek;
     private Coroutine moveRoutine;
 
-    private Vector2 Direction => (expandedPos - peekPos).normalized;
-
-    private void Start()
+    private Vector2 Direction
     {
-        SetPosition(PanelState.Peek, false);
+        get
+        {
+            return (expandedPos - peekPos).normalized;
+        }
     }
 
     /*

@@ -23,6 +23,8 @@ public class UIManager : MonoBehaviour
     
     [Header("레시피 UI")]
     [SerializeField]
+    OrderSheetPanel orderSheetPanel;
+    [SerializeField]
     private Text[] ingreTexts;
     [SerializeField]
     private Text cocktailNameText;
@@ -47,6 +49,7 @@ public class UIManager : MonoBehaviour
     private void Awake()
     {
         gameManager.OnPhaseChange += OnPhaseChange;
+        gameManager.OnGameStart += OnGameStart;
         gameTimer.OnTimeTick += OnTimeTick;
         scoreSystem.OnCurrentScoreAdd += OnCurrentScoreAdd;
         scoreSystem.OnCommitScore += OnCommitScore;
@@ -89,6 +92,11 @@ public class UIManager : MonoBehaviour
         isPaused = false;
         Time.timeScale = 1f;
         settingPanel.SetActive(false);
+    }
+
+    private void OnGameStart()
+    {
+        orderSheetPanel.SetPosition(OrderSheetPanel.PanelState.Peek, false);
     }
 
     private void OnPhaseChange(GamePhase newPhase)
@@ -141,6 +149,11 @@ public class UIManager : MonoBehaviour
         highScoreText.text = isHigh ? "신기록!" : $"최고 점수 {best} 점";
     }
 
+    private void InitIngredientSheet()
+    {
+        
+    }
+    
     private void OnIngredientChanged(RecipeData recipe, Dictionary<string, float> poured)
     {
         cocktailNameText.text = recipe.Name;

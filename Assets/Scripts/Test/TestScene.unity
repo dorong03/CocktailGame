@@ -1057,6 +1057,7 @@ MonoBehaviour:
   inGamePanel: {fileID: 1563317686}
   gameEndPanel: {fileID: 1546947429}
   settingPanel: {fileID: 946748634}
+  orderSheetPanel: {fileID: 1623554026}
   ingreTexts:
   - {fileID: 424394448}
   - {fileID: 424394447}
@@ -3469,6 +3470,17 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1623554026 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 196555760843412409, guid: 606f8a2c01c6341dd95cb37fa11975f3, type: 3}
+  m_PrefabInstance: {fileID: 424394442}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d995728d113f49819a257db00d70735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &1664833563
 GameObject:
   m_ObjectHideFlags: 0

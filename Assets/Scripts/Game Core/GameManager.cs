@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private ScoreSystem scoreSystem;
 
     public event Action<GamePhase> OnPhaseChange;
+    public event Action OnGameStart;
     
     public void Start()
     {
@@ -38,6 +39,7 @@ public class GameManager : MonoBehaviour
         scoreSystem.ResetCurrentScore();
         timer.Prepare(timeLimit);
         NextRound();
+        OnGameStart?.Invoke();
     }
 
     public void RestartGame()
