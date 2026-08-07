@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
     
     public void GoToMainMenu()
     {
+        station.Abort();
+        npcController.Clear();
         ChangePhase(GamePhase.MainMenu);
     }
     
