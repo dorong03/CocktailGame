@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,14 @@ public class UIManager : MonoBehaviour
     private GameTimer gameTimer;
     [SerializeField] 
     private ScoreSystem scoreSystem;
+    [SerializeField] 
+    private CocktailMaker cocktailMaker;
+    
+    [Header("레시피 UI")]
+    [SerializeField]
+    private Text[] ingreTexts;
+    [SerializeField]
+    private Text cocktailNameText;
     
     [Header("타이머 필드")]
     [SerializeField]
@@ -27,6 +36,7 @@ public class UIManager : MonoBehaviour
         gameTimer.OnTimeTick += OnTimeTick;
         scoreSystem.OnCurrentScoreAdd += OnCurrentScoreAdd;
         scoreSystem.OnCommitScore += OnCommitScore;
+        cocktailMaker.OnIngredientChanged += OnIngredientChanged;
     }
 
     private void OnPhaseChange(GamePhase newPhase)
@@ -66,5 +76,27 @@ public class UIManager : MonoBehaviour
     {
         // isHigh 가 True 이면 최고 점수 도달한 화면
         // False 라면 이전 최고점수와 현재점수 띄우기
+    }
+
+    private void OnIngredientChanged(RecipeData recipe, Dictionary<string, float> poured)
+    {
+        cocktailNameText.text = recipe.Name;
+
+        for (int i = 0; i < ingreTexts.Length; i++)
+        {
+            if (i < recipe.Ingredients.Count)
+            {
+                IngredientAmount ingre = recipe.Ingredients[i];
+                string ingreName = DataRepository.Instance.GetIngredientData(ingre.IngredientId).Name;
+                float current = poured[ingre.IngredientId];
+
+                ingreTexts[i].gameObject.SetActive(true);
+                ingreTexts[i].text = $"{ingreName}  {current:0} / {ingre.Amount:0}";
+            }
+            else
+            {
+                ingreTexts[i].text = "";
+            }
+        }
     }
 }

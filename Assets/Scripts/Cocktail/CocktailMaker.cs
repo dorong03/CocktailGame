@@ -6,7 +6,6 @@ public class CocktailMaker : MonoBehaviour
 {
     // 액체 집계 담당
     // 어디에 붓는지(Cup / MixingCup)는 PlayerStation 이 정해서 IPourTarget 으로 넘겨줌
-
     [SerializeField]
     private List<Bottle> bottles;
 
@@ -14,6 +13,8 @@ public class CocktailMaker : MonoBehaviour
     private IPourTarget currentTarget;
     private Dictionary<string, float> pouredAmounts = new Dictionary<string, float>();
 
+    public event Action<RecipeData, Dictionary<string, float>> OnIngredientChanged;
+        
     private Action onMixReady;
     private Action<MixResult> onComplete;
 
@@ -24,7 +25,7 @@ public class CocktailMaker : MonoBehaviour
         this.onMixReady = onMixReady;
         this.onComplete = onComplete;
         pouredAmounts.Clear();
-
+        
         for (int i = 0; i < recipe.Ingredients.Count; i++)
         {
             IngredientAmount ingre = recipe.Ingredients[i];
@@ -32,6 +33,7 @@ public class CocktailMaker : MonoBehaviour
             bottles[i].Show();
             bottles[i].Init(ingre.IngredientId, null, target, HandlePour);
         }
+        OnIngredientChanged?.Invoke(currentRecipe, pouredAmounts);
     }
 
     public bool AllPouredAtLeastOnce()
@@ -72,16 +74,7 @@ public class CocktailMaker : MonoBehaviour
         
         if (!pouredAmounts.TryGetValue(ingredientId, out float value)) return;
         pouredAmounts[ingredientId] += amount;
-        #region 테스트코드 추후 삭제
-        Dictionary<string, float> dic = new();
-        
-        foreach(var a in currentRecipe.Ingredients)
-        {
-            dic[a.IngredientId] = a.Amount;
-        }
-        Debug.Log($"{ingredientId} 투입량: {pouredAmounts[ingredientId]} / {dic[ingredientId]}");
-
-        #endregion
+        OnIngredientChanged?.Invoke(currentRecipe, pouredAmounts);
         if (currentTarget is Cup) currentTarget?.SetFill(ComputeFillRatio(), Color.cyan);
 
         if (!string.IsNullOrEmpty(currentRecipe.ToolId) && AllPouredAtLeastOnce())
