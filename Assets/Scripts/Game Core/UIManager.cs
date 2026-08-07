@@ -13,6 +13,11 @@ public class UIManager : MonoBehaviour
     private ScoreSystem scoreSystem;
     [SerializeField] 
     private CocktailMaker cocktailMaker;
+
+    [Header("패널")]
+    [SerializeField] private GameObject mainMenuPanel;
+    [SerializeField] private GameObject inGamePanel;
+    [SerializeField] private GameObject gameEndPanel;
     
     [Header("레시피 UI")]
     [SerializeField]
@@ -29,8 +34,12 @@ public class UIManager : MonoBehaviour
     [Header("점수 필드")]
     [SerializeField] 
     private Text scoreText;
-    
-    public void Start()
+    [SerializeField]
+    private Text finalScoreText;
+    [SerializeField]
+    private Text highScoreText;
+
+    private void Awake()
     {
         gameManager.OnPhaseChange += OnPhaseChange;
         gameTimer.OnTimeTick += OnTimeTick;
@@ -44,18 +53,21 @@ public class UIManager : MonoBehaviour
         switch(newPhase)
         {
             case GamePhase.MainMenu:
-                // 메인 메뉴 Panel 띄우기
+                mainMenuPanel.SetActive(true);
+                inGamePanel.SetActive(false);
+                gameEndPanel.SetActive(false);
                 break;
             case GamePhase.Ready:
-                // 메인 메뉴 패널 치우고 게임 패널 오픈
-                break;
             case GamePhase.Ordering:
-                // 이런 곳에서 레시피나 그런거 띄우는걸로
-                break;
             case GamePhase.Processing:
+                mainMenuPanel.SetActive(false);
+                inGamePanel.SetActive(true);
+                gameEndPanel.SetActive(false);
                 break;
             case GamePhase.Result:
-                // 결과창 띄우기
+                mainMenuPanel.SetActive(false);
+                inGamePanel.SetActive(true);
+                gameEndPanel.SetActive(true);
                 break;
         }
     }
@@ -74,8 +86,9 @@ public class UIManager : MonoBehaviour
 
     private void OnCommitScore(bool isHigh, int score)
     {
-        // isHigh 가 True 이면 최고 점수 도달한 화면
-        // False 라면 이전 최고점수와 현재점수 띄우기
+        finalScoreText.text = $"{score} 점";
+        int best = PlayerPrefs.GetInt("highScore", 0);
+        highScoreText.text = isHigh ? "신기록!" : $"최고 점수 {best} 점";
     }
 
     private void OnIngredientChanged(RecipeData recipe, Dictionary<string, float> poured)

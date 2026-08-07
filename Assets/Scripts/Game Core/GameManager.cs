@@ -20,9 +20,10 @@ public class GameManager : MonoBehaviour
     private ScoreSystem scoreSystem;
 
     public event Action<GamePhase> OnPhaseChange;
-
+    
     public void Start()
     {
+        timer.OnTimeOver += HandleTimeOver;
         GoToMainMenu();
     }
     
@@ -35,7 +36,6 @@ public class GameManager : MonoBehaviour
     {
         scoreSystem.ResetCurrentScore();
         timer.Prepare(timeLimit);
-        timer.OnTimeOver += HandleTimeOver;
         NextRound();
     }
 
