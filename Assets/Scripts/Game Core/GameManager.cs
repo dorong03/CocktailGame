@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     private GameTimer timer;
     [SerializeField] 
     private PlayerStationController station;
+    [SerializeField] 
+    private ScoreSystem scoreSystem;
 
     public event Action<GamePhase> OnPhaseChange;
 
@@ -31,6 +33,7 @@ public class GameManager : MonoBehaviour
     
     public void StartGame()
     {
+        scoreSystem.ResetCurrentScore();
         timer.Prepare(timeLimit);
         timer.OnTimeOver += HandleTimeOver;
         NextRound();
@@ -50,6 +53,7 @@ public class GameManager : MonoBehaviour
         station.Abort();
         npcController.Clear();
         Debug.Log("Game Ended!!!");
+        scoreSystem.CommitHighScore();
         ChangePhase(GamePhase.Result);
     }
 
@@ -70,11 +74,16 @@ public class GameManager : MonoBehaviour
     private void OnStationComplete(MixResult mixResult,Grade grade)
     {
         ChangePhase(GamePhase.Processing);
+        
         float accuracy = ScoreCalculator.GetMixAccuracy(currentOrder.Recipe, mixResult);
         int currentRecipeScore = ScoreCalculator.GetFinalScore(currentOrder.Recipe.BaseScore, accuracy);
-        Debug.Log($"이번에 획득한 점수는 {currentRecipeScore} 점 입니다.");
-        Debug.Log($"레시피 아이디: {currentOrder.Recipe.Id}, 기본 점수: {currentOrder.Recipe.BaseScore}, 정확도: {accuracy}");
+        float bonusSecond = ScoreCalculator.GetBonusSeconds(grade);
+        
+        scoreSystem.AddCurrentScore(currentRecipeScore);
+        timer.AddBonus(bonusSecond);
         npcController.Depart(NextRound);
+        // Debug.Log($"레시피 아이디: {currentOrder.Recipe.Id}, 기본 점수: {currentOrder.Recipe.BaseScore}, 정확도: {accuracy}");
+        
     }
 
     private void HandleTimeOver()

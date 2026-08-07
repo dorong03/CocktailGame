@@ -1,29 +1,53 @@
+using System;
 using UnityEngine;
 
 public class ScoreSystem : MonoBehaviour
 {
+    public event Action<int> OnCurrentScoreAdd;
+    public event Action<bool, int> OnCommitScore;
+    
     public int Total { get; private set; }
 
-    public void Add(int score)
+    public void AddCurrentScore(int score)
     {
         Total += score;
+        OnCurrentScoreAdd?.Invoke(score);
     }
 
-    public bool CommitHigScore()
+    public void ResetCurrentScore()
     {
-        if (PlayerPrefs.HasKey("highScore"))
+        Total = 0;
+    }
+
+    public void CommitHighScore()
+    {
+        if (!PlayerPrefs.HasKey("highScore"))
         {
-            int best = PlayerPrefs.GetInt("highScore");
-            if (best < Total)
-            {
-                PlayerPrefs.SetInt("highScore", Total);
-            }
-            return true;
+            PlayerPrefs.SetInt("highScore", 0);
         }
-        else
+
+
+        bool isHighScore = false;
+        int best =  PlayerPrefs.GetInt("highScore");
+        
+        if (Total > best)
         {
-            PlayerPrefs.SetFloat("highScore", Total);
-            return false;
+            PlayerPrefs.SetInt("highScore", Total);
+            isHighScore = true;
         }
+        OnCommitScore?.Invoke(isHighScore, Total);
+        
+        // if (PlayerPrefs.HasKey("highScore"))
+        // {
+        //     int best = PlayerPrefs.GetInt("highScore");
+        //     if (best < Total)
+        //     {
+        //         PlayerPrefs.SetInt("highScore", Total);
+        //     }
+        // }
+        // else
+        // {
+        //     PlayerPrefs.SetFloat("highScore", Total);
+        // }
     }
 }
