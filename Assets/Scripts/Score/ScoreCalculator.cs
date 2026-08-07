@@ -45,8 +45,7 @@ static class ScoreCalculator
     public static int GetFinalScore(int baseScore, float accuracy)
     {
         // 레시피의 베이스 스코어와 재료 정확도의 점수, 시트 점수를 총함하여 보내기
-        float floatBaseScore = (float)baseScore;
-        return Convert.ToInt32(floatBaseScore * accuracy);
+        return Convert.ToInt32(baseScore * accuracy);
     }
 
     // Grade 를 받아서 시간 반환해주기
