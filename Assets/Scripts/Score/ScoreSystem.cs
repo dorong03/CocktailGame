@@ -11,7 +11,7 @@ public class ScoreSystem : MonoBehaviour
     public void AddCurrentScore(int score)
     {
         Total += score;
-        OnCurrentScoreAdd?.Invoke(score);
+        OnCurrentScoreAdd?.Invoke(Total);
     }
 
     public void ResetCurrentScore()
