@@ -19,7 +19,7 @@ public class RecipePanel : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     private void Start()
     {
-        SetPosition(PanelState.Expanded, false);
+        SetPosition(PanelState.Peek, false);
     }
 
     /*

@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     
     public void Start()
     {
+        Application.targetFrameRate = 60;
         timer.OnTimeOver += HandleTimeOver;
         GoToMainMenu();
     }
@@ -95,5 +96,10 @@ public class GameManager : MonoBehaviour
     {
         phase = newPhase;
         OnPhaseChange?.Invoke(phase);
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 public class DragInput : MonoBehaviour
 {
     // Ȥ�� ���� �ٸ� ��ü�� �巡�� �ϰ� �ִ��� �˻�?
-    private static DragInput dragItem;
+    public static DragInput DragItem { get; private set; }
 
     // ���� �ش� ��ü�� ��ȣ�ۿ� ������ ��������
     public bool interactable;
@@ -51,10 +51,10 @@ public class DragInput : MonoBehaviour
 
         if(!IsGrabbed)
         {
-            if(Mouse.current.leftButton.wasPressedThisFrame && dragItem == null && _collider.OverlapPoint(worldPos))
+            if(Mouse.current.leftButton.wasPressedThisFrame && DragItem == null && _collider.OverlapPoint(worldPos))
             {
                 IsGrabbed = true;
-                dragItem = this;
+                DragItem = this;
                 GrabWorldPos = worldPos;
                 CurrentWorldPos = worldPos;
                 TotalDragDistance = 0f;
@@ -77,10 +77,10 @@ public class DragInput : MonoBehaviour
         }
     }
     
-    private void CancleGrab()
+    public void CancleGrab()
     {
         IsGrabbed = false;
-        if (dragItem == this) dragItem = null;
+        if (DragItem == this) DragItem = null;
         onRelease?.Invoke();
     }
 
@@ -91,6 +91,6 @@ public class DragInput : MonoBehaviour
 
     public void Test()
     {
-        dragItem = null;
+        DragItem = null;
     }
 }

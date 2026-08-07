@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -18,6 +19,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject mainMenuPanel;
     [SerializeField] private GameObject inGamePanel;
     [SerializeField] private GameObject gameEndPanel;
+    [SerializeField] private GameObject settingPanel;
     
     [Header("레시피 UI")]
     [SerializeField]
@@ -39,6 +41,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Text highScoreText;
 
+    private GamePhase currentPhase;
+    private bool isPaused;
+
     private void Awake()
     {
         gameManager.OnPhaseChange += OnPhaseChange;
@@ -48,11 +53,53 @@ public class UIManager : MonoBehaviour
         cocktailMaker.OnIngredientChanged += OnIngredientChanged;
     }
 
+    private void Update()
+    {
+        if (!Keyboard.current.escapeKey.wasPressedThisFrame) return;
+
+        if (isPaused)
+        {
+            ResumeGame();
+        }
+        else if (IsInGamePhase(currentPhase))
+        {
+            PauseGame();
+        }
+    }
+
+    private bool IsInGamePhase(GamePhase p)
+    {
+        return p == GamePhase.Ready || p == GamePhase.Ordering || p == GamePhase.Processing;
+    }
+
+    private void PauseGame()
+    {
+        isPaused = true;
+        Time.timeScale = 0f;
+        if (DragInput.DragItem != null)
+        {
+            DragInput dragItem = DragInput.DragItem;
+            dragItem.CancleGrab();
+        }
+        settingPanel.SetActive(true);
+    }
+
+    private void ResumeGame()
+    {
+        isPaused = false;
+        Time.timeScale = 1f;
+        settingPanel.SetActive(false);
+    }
+
     private void OnPhaseChange(GamePhase newPhase)
     {
+        currentPhase = newPhase;
+
         switch(newPhase)
         {
             case GamePhase.MainMenu:
+                if (isPaused) ResumeGame();
+                settingPanel.SetActive(false);
                 mainMenuPanel.SetActive(true);
                 inGamePanel.SetActive(false);
                 gameEndPanel.SetActive(false);
@@ -65,6 +112,7 @@ public class UIManager : MonoBehaviour
                 gameEndPanel.SetActive(false);
                 break;
             case GamePhase.Result:
+                if (isPaused) ResumeGame();
                 mainMenuPanel.SetActive(false);
                 inGamePanel.SetActive(true);
                 gameEndPanel.SetActive(true);
