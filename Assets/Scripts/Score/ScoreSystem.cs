@@ -17,6 +17,7 @@ public class ScoreSystem : MonoBehaviour
     public void ResetCurrentScore()
     {
         Total = 0;
+        OnCurrentScoreAdd?.Invoke(0);
     }
 
     public void CommitHighScore()

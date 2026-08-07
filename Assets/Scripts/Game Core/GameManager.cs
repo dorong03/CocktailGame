@@ -40,6 +40,13 @@ public class GameManager : MonoBehaviour
         NextRound();
     }
 
+    public void RestartGame()
+    {
+        station.Abort();
+        npcController.Clear();
+        StartGame();
+    }
+
     private void CreateNewOrder()
     {
         NpcData npcData = orderService.PickNpc();
@@ -53,7 +60,6 @@ public class GameManager : MonoBehaviour
     {
         station.Abort();
         npcController.Clear();
-        Debug.Log("Game Ended!!!");
         scoreSystem.CommitHighScore();
         ChangePhase(GamePhase.Result);
     }

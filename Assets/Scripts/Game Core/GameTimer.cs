@@ -33,6 +33,7 @@ public class GameTimer : MonoBehaviour
         isRunning = false;
         MaxTime = second;
         remaining = second;
+        OnTimeTick?.Invoke(remaining);
     }
 
     public void Begin()

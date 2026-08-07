@@ -107,6 +107,8 @@ public class UIManager : MonoBehaviour
             case GamePhase.Ready:
             case GamePhase.Ordering:
             case GamePhase.Processing:
+                if (isPaused) ResumeGame();
+                settingPanel.SetActive(false);
                 mainMenuPanel.SetActive(false);
                 inGamePanel.SetActive(true);
                 gameEndPanel.SetActive(false);
