@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00b24a154edf98d4ba88e73853701aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BarSpoonTool
-  count: 0
+  count: 3
   stirCenter: {fileID: 4523024701353620460}
   minStirRadius: 0.2
   mixingCupCollider: {fileID: 8341856281889792060}
