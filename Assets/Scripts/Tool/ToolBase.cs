@@ -16,7 +16,7 @@ public abstract class ToolBase : MonoBehaviour
     protected Action onStarted;
     protected Action onComplete;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         drag = GetComponent<DragInput>();
         drag.onGrab = GrabHandler;

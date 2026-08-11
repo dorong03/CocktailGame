@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     
     public void StartGame()
     {
+        Debug.Log("Starting Game");
         scoreSystem.ResetCurrentScore();
         timer.Prepare(timeLimit);
         NextRound();

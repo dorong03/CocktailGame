@@ -28,10 +28,11 @@ public class CocktailMaker : MonoBehaviour
         
         for (int i = 0; i < recipe.Ingredients.Count; i++)
         {
+            Sprite bottleSprite = SpriteRepository.Instance.GetIngredientSprite(recipe.Ingredients[i].IngredientId);
             IngredientAmount ingre = recipe.Ingredients[i];
             pouredAmounts.Add(ingre.IngredientId, 0);
             bottles[i].Show();
-            bottles[i].Init(ingre.IngredientId, null, target, HandlePour);
+            bottles[i].Init(ingre.IngredientId, bottleSprite, target, HandlePour);
         }
         OnIngredientChanged?.Invoke(currentRecipe, pouredAmounts);
     }

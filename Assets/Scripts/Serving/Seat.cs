@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 public class Seat : MonoBehaviour
 {
     private string seatId;
-    private float[] zoneHalfWidth = { 0.4f, 0.7f, 1.2f, 2f };
+    private float[] zoneHalfWidth = { 3f, 5f, 7f, 10f };
 
     public Grade EvaluateLanding(Vector2 landPos)
     {

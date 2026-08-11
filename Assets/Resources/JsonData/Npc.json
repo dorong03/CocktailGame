@@ -13,15 +13,5 @@
     "Id": "NPC_002",
     "Name": "김도훈",
     "OrderGroupId": "ORDER_000"
-  },
-  {
-    "Id": "NPC_003",
-    "Name": " 정세윤",
-    "OrderGroupId": "ORDER_000"
-  },
-  {
-    "Id": "NPC_004",
-    "Name": "권령우",
-    "OrderGroupId": "ORDER_000"
   }
 ]

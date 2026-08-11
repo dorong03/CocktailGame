@@ -62,7 +62,7 @@ public class OrderSheetPanel : MonoBehaviour, IPointerEnterHandler, IPointerExit
                 MoveVisual(peekPos + Direction * hoverOffset);
                 break;
             case PanelState.Expanded:
-                MoveVisual(expandedPos - Direction * hoverOffset);
+                // MoveVisual(expandedPos - Direction * hoverOffset);
                 break;
             case PanelState.Moving:
                 break;

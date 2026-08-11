@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class NpcController : MonoBehaviour
 {
     private Coroutine routine;
@@ -12,62 +13,54 @@ public class NpcController : MonoBehaviour
     [SerializeField]
     private float moveDuration = 1f;
     [SerializeField]
+    private float spawnYOffset = -10f;
+    [SerializeField]
     private float moveDistance = 6f;
-    private float moveSpeed;
 
     private Seat seat;
 
     private void Awake()
-    { 
+    {
         data = DataRepository.Instance;
         spriteRenderer = GetComponent<SpriteRenderer>();
-        moveSpeed = moveDistance / moveDuration;
         Clear();
     }
-    
+
     public void SpawnNpc(NpcData npc, Seat seat, Action onArrived)
     {
+        spriteRenderer.sprite = SpriteRepository.Instance.GetNpcSprite(npc.Id);
         gameObject.SetActive(true);
         this.seat = seat;
-        transform.position = seat.transform.position;
+        transform.position = SpawnPosition(seat);
         if(routine != null) StopCoroutine(routine);
-        routine = StartCoroutine(PositionUp(onArrived));
+        routine = StartCoroutine(MoveTo(transform.position + Vector3.up * moveDistance, onArrived));
     }
-    
+
     public void Depart(Action onGone)
     {
-        transform.position = seat.transform.position + Vector3.up * moveDistance;
         if(routine != null) StopCoroutine(routine);
-        routine = StartCoroutine(PositionDown(onGone));
+        routine = StartCoroutine(MoveTo(transform.position - Vector3.up * moveDistance, onGone));
     }
 
-    private IEnumerator PositionUp(Action onArrived)
+    private Vector3 SpawnPosition(Seat targetSeat)
     {
+        Vector3 seatPos = targetSeat.transform.position;
+        return new Vector3(seatPos.x, seatPos.y + spawnYOffset, seatPos.z);
+    }
+
+    private IEnumerator MoveTo(Vector3 target, Action onDone)
+    {
+        Vector3 start = transform.position;
         float timer = 0f;
 
         while (timer < moveDuration)
         {
-            transform.position += Vector3.up * (Time.deltaTime * moveSpeed);
+            transform.position = Vector3.Lerp(start, target, timer / moveDuration);
             timer += Time.deltaTime;
             yield return null;
         }
-        transform.position = seat.transform.position + moveDistance * Vector3.up;
-        onArrived?.Invoke();
-        routine = null;
-    }
-
-    private IEnumerator PositionDown(Action onGone)
-    {
-        float timer = 0f;
-
-        while (timer < moveDuration)
-        {
-            transform.position -= Vector3.up * (Time.deltaTime * moveSpeed);
-            timer += Time.deltaTime;
-            yield return null;
-        }
-        transform.position = seat.transform.position;
-        onGone?.Invoke();
+        transform.position = target;
+        onDone?.Invoke();
         routine = null;
     }
     

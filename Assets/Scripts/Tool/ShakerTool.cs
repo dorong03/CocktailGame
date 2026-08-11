@@ -24,8 +24,9 @@ public class ShakerTool : ToolBase
     private Transform homeTargetParent;
 
 
-    public void Start()
+    protected override void Awake()
     {
+        base.Awake();
         originPos = transform.position;
         requiredCount = ShakerToolCount;
         Hide();

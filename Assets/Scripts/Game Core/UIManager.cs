@@ -96,7 +96,7 @@ public class UIManager : MonoBehaviour
 
     private void OnGameStart()
     {
-        orderSheetPanel.SetPosition(OrderSheetPanel.PanelState.Peek, false);
+        orderSheetPanel.SetPosition(OrderSheetPanel.PanelState.Expanded, false);
     }
 
     private void OnPhaseChange(GamePhase newPhase)

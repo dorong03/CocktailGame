@@ -5,7 +5,7 @@ public class Droplet : MonoBehaviour
 {
     private Vector2 velocity;
     private float lifetime;
-    private float gravity = 20f;
+    private float gravity = 40f;
     
     private string ingredientId;
     private float amount;
