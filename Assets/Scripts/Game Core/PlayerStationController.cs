@@ -18,7 +18,7 @@ public class PlayerStationController : MonoBehaviour
     private MixingCup barSpoon;
 
     // MixingCup -> Cup 으로 옮겨 담는 연출 시간
-    private const float TransferDuration = 1f;
+    private const float TransferDuration = 2.5f;
 
     private RecipeData recipe;
     private Seat seat;
@@ -38,7 +38,7 @@ public class PlayerStationController : MonoBehaviour
         this.seat = seat;
         this.onOrderComplete = onComplete;
 
-        cup.Show();
+        cup.Show(recipe);
 
         if (string.IsNullOrEmpty(recipe.ToolId))
         {
@@ -116,7 +116,7 @@ public class PlayerStationController : MonoBehaviour
     // 도구 시작할때 이펙트나 뭐 그런거
     private void OnToolStarted()
     {
-
+        maker.HideBottles();
     }
 
     // 무대에 올라온 오브젝트 전부 정리

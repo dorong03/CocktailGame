@@ -5,15 +5,25 @@ using UnityEngine;
 [RequireComponent(typeof(DragInput))]
 public class Cup : MonoBehaviour, IPourTarget
 {
+    
+
+    [Header("스프라이트 렌더러 설정")]
+    [SerializeField] 
+    private SpriteRenderer cupBackRenderer;
+    [SerializeField] 
+    private SpriteRenderer cupFrontRenderer;
+    [SerializeField]
+    private SpriteRenderer cupFillRenderer;
+    [SerializeField]
+    private SpriteMask fillMask;
     [SerializeField]
     private SpriteRenderer mouthRenderer;
-    [SerializeField]
-    private SpriteRenderer fillRenderer;
-
+    
     private DragInput drag;
     private CupMode mode;
 
     private Vector2 homePos;
+    private float fillHeight;
 
     private Action onSubmit;
     private Action<Vector2> onCupLand;
@@ -23,7 +33,7 @@ public class Cup : MonoBehaviour, IPourTarget
     private const float Deceleration = 11f;
     
     // 술이 차오르는 픽셀 기준
-    const int pixelStep = 8;
+    const int PixelStep = 32;
     
     private void Awake()
     {
@@ -114,24 +124,41 @@ public class Cup : MonoBehaviour, IPourTarget
     {
         ratio = Mathf.Clamp01(ratio);
         
-        float steppedRatio = Mathf.Floor(ratio * pixelStep) / pixelStep;
-        
-        fillRenderer.color = color;
-        
-        Vector3 scale = fillRenderer.transform.localScale;
-        scale.y = Mathf.Max(1f / pixelStep, steppedRatio);
-        fillRenderer.transform.localScale = scale;
+        float steppedRatio = Mathf.Floor(ratio * PixelStep) / PixelStep;
+
+        Vector3 pos = cupFillRenderer.transform.localPosition;
+        pos.y = Mathf.Lerp(-fillHeight, 0f, steppedRatio);
+        cupFillRenderer.transform.localPosition = pos;
     }
 
-    public void Show()
+    public void Show(RecipeData recipe)
     {
-        gameObject.SetActive(true);
+        // 레시피에 맞게 변경
+        Sprite glassFront = SpriteRepository.Instance.GetGlassSprites(recipe.GlassType).FrontSprite;
+        Sprite glassBack = SpriteRepository.Instance.GetGlassSprites(recipe.GlassType).BackSprite;
+        Sprite fill = SpriteRepository.Instance.GetCocktailSprite(recipe.Id);
+        
+        cupFrontRenderer.sprite = glassFront;
+        cupBackRenderer.sprite = glassBack;
+        cupFillRenderer.sprite = fill;
+        fillMask.sprite = fill;
+        
+        fillHeight = cupFillRenderer.sprite != null ?
+            cupFillRenderer.sprite.bounds.size.y : 0f;
+        
         SetFill(0f, Color.white);
         transform.position = homePos;
+        gameObject.SetActive(true);
     }
 
     public void Hide()
     {
+        cupBackRenderer.sprite = null;
+        cupFrontRenderer.sprite = null;
+        cupFillRenderer.sprite = null;
+        fillMask.sprite = null;
+        fillHeight = 0f;
+        
         gameObject.SetActive(false);
     }
 }

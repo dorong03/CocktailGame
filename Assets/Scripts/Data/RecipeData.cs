@@ -8,4 +8,5 @@ public class RecipeData
     public int BaseScore;
     public string ToolId;
     public List<IngredientAmount> Ingredients;
+    public string GlassType;
 }
