@@ -86,6 +86,8 @@ public class OrderSheetPanel : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (eventData.button.Equals(PointerEventData.InputButton.Right)) return;
+        
         if (state == PanelState.Peek)
             TransitionTo(PanelState.Expanded, expandedPos);
         else if (state == PanelState.Expanded)

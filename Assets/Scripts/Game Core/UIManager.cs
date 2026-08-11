@@ -150,9 +150,10 @@ public class UIManager : MonoBehaviour
 
     private void OnCommitScore(bool isHigh, int score)
     {
-        finalScoreText.text = $"{score} 점";
+        finalScoreText.text = $"{score}";
         int best = PlayerPrefs.GetInt("highScore", 0);
-        highScoreText.text = isHigh ? "신기록!" : $"최고 점수 {best} 점";
+        // 일단 같지만 추후 변경
+        highScoreText.text = isHigh ? $"{best}" : $"{best}";
     }
 
     private void InitIngredientSheet()
@@ -173,7 +174,7 @@ public class UIManager : MonoBehaviour
                 float current = poured[ingre.IngredientId];
 
                 ingreTexts[i].gameObject.SetActive(true);
-                ingreTexts[i].text = $"• {ingreName}  {current:0} / {ingre.Amount:0}";
+                ingreTexts[i].text = $"{ingreName}  {current:0} / {ingre.Amount:0}";
             }
             else
             {

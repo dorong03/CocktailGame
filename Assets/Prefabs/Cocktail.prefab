@@ -86,7 +86,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 12, y: 18}
+  m_Size: {x: 12, y: 12.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -205,6 +205,17 @@ MonoBehaviour:
   cupFillRenderer: {fileID: 8925483364754002599}
   fillMask: {fileID: 3694278661937559169}
   mouthRenderer: {fileID: 8925483364754002599}
+  maxPullDistance: 20
+  minThrowDistance: 4
+  maxThrowDistance: 32
+  minFlightDuration: 0.25
+  maxFlightDuration: 0.9
+  aimIndicator: {fileID: 0}
+  tableBoundary: {fileID: 0}
+  offTableSortingOrder: -998
+  fallDuration: 0.35
+  fallDistance: 25
+  fallAngle: 120
 --- !u!1 &5124640010938059939
 GameObject:
   m_ObjectHideFlags: 0
@@ -382,7 +393,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 12, y: 18}
+  m_Size: {x: 12, y: 9.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -473,7 +484,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 12, y: 18}
+  m_Size: {x: 12, y: 12.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
