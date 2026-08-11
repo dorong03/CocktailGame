@@ -50,6 +50,7 @@ public class UIManager : MonoBehaviour
     {
         gameManager.OnPhaseChange += OnPhaseChange;
         gameManager.OnGameStart += OnGameStart;
+        gameManager.OnRecipeSelected += OnRecipeSelected;
         gameTimer.OnTimeTick += OnTimeTick;
         scoreSystem.OnCurrentScoreAdd += OnCurrentScoreAdd;
         scoreSystem.OnCommitScore += OnCommitScore;
@@ -96,7 +97,12 @@ public class UIManager : MonoBehaviour
 
     private void OnGameStart()
     {
-        orderSheetPanel.SetPosition(OrderSheetPanel.PanelState.Expanded, false);
+        orderSheetPanel.SetPosition(OrderSheetPanel.PanelState.Peek, false);
+    }
+
+    private void OnRecipeSelected()
+    {
+        orderSheetPanel.SetPosition(OrderSheetPanel.PanelState.Expanded, true);
     }
 
     private void OnPhaseChange(GamePhase newPhase)
@@ -167,7 +173,7 @@ public class UIManager : MonoBehaviour
                 float current = poured[ingre.IngredientId];
 
                 ingreTexts[i].gameObject.SetActive(true);
-                ingreTexts[i].text = $"{ingreName}  {current:0} / {ingre.Amount:0}";
+                ingreTexts[i].text = $"• {ingreName}  {current:0} / {ingre.Amount:0}";
             }
             else
             {

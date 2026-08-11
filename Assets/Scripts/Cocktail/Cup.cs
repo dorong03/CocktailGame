@@ -18,8 +18,9 @@ public class Cup : MonoBehaviour, IPourTarget
     private SpriteMask fillMask;
     [SerializeField]
     private SpriteRenderer mouthRenderer;
-    
+
     private DragInput drag;
+    private Collider2D cupCollider;
     private CupMode mode;
 
     private Vector2 homePos;
@@ -29,20 +30,29 @@ public class Cup : MonoBehaviour, IPourTarget
     private Action<Vector2> onCupLand;
 
     // 잔이 날라가는 속도와 줄어드는 속도 크기
-    private const float MaxSpeed = 10f;
-    private const float Deceleration = 11f;
-    
+    private const float MaxSpeed = 22f;
+    private const float Deceleration = 5f;
+    private const float DecelerationRamp = 10f; // 날아가는 시간이 길어질수록 제동력이 점점 세짐
+
+    // 당긴 거리 -> 날아가는 거리 환산
+    private const float MaxPullDistance = 4f; // 이 이상 당겨도 더 세지지 않음
+    private const float DistanceMultiplier = 12f; // 당긴 거리 1당 날아가는 거리
+
     // 술이 차오르는 픽셀 기준
     const int PixelStep = 32;
-    
+
     private void Awake()
     {
         drag = GetComponent<DragInput>();
+        cupCollider = GetComponent<Collider2D>();
         homePos = transform.position;
         drag.onRelease = HandleRelease;
         Hide();
     }
-    
+
+    // 당기는 기준점: 콜라이더 중심 (transform.position이 아님)
+    private Vector2 PullOrigin => cupCollider != null ? (Vector2)cupCollider.bounds.center : homePos;
+
     public void SetMode(CupMode mode)
     {
         this.mode = mode;
@@ -74,26 +84,24 @@ public class Cup : MonoBehaviour, IPourTarget
         else if (mode == CupMode.Throwable)
         {
             //던지기
-            Vector2 offset = (Vector2)drag.CurrentWorldPos - homePos;
-            offset = -offset;
-            StartCoroutine(ThrowRoutine(offset));
+            Vector2 offset = (Vector2)drag.CurrentWorldPos - PullOrigin;
+            Vector2 direction = (-offset).normalized;
+            float throwDistance = Mathf.Min(offset.magnitude, MaxPullDistance) * DistanceMultiplier;
+            StartCoroutine(ThrowRoutine(direction, throwDistance));
         }
     }
 
-    
-    /*
-     * throwVector.magnitude * 4f <- 당긴 거리가 너무 작게 판정되서 임의로 4 곱함
-     * 속도 조절은 추후에 더 진행하는걸로 수치 조금씩 바꿔가면서
-     */
-    private IEnumerator ThrowRoutine(Vector2 throwVector)
+    // 원하는 비행 거리(throwDistance)만큼 날아가도록 초기 속도를 역산
+    private IEnumerator ThrowRoutine(Vector2 direction, float throwDistance)
     {
-        Vector2 direction = throwVector.normalized;
-        float speed = Mathf.Min(throwVector.magnitude * 4f, MaxSpeed);
+        float speed = Mathf.Min(Mathf.Sqrt(2f * Deceleration * throwDistance), MaxSpeed);
+        float elapsed = 0f;
 
         while (speed > 0.01f)
         {
             transform.position += (Vector3)(direction * (speed * Time.deltaTime));
-            speed -= Deceleration * Time.deltaTime;
+            speed -= (Deceleration + elapsed * DecelerationRamp) * Time.deltaTime;
+            elapsed += Time.deltaTime;
             yield return null;
         }
         onCupLand?.Invoke(transform.position);

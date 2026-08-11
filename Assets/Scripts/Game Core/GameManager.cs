@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
 
     public event Action<GamePhase> OnPhaseChange;
     public event Action OnGameStart;
+    public event Action OnRecipeSelected;
     
     public void Start()
     {
@@ -81,6 +82,7 @@ public class GameManager : MonoBehaviour
         ChangePhase(GamePhase.Ordering);
         timer.Begin();
         station.BeginOrder(currentOrder.Recipe, currentOrder.Seat, OnStationComplete);
+        OnRecipeSelected?.Invoke();
     }
 
     private void OnStationComplete(MixResult mixResult,Grade grade)
