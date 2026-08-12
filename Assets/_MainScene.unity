@@ -1013,7 +1013,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7553345145253354662, guid: 606f8a2c01c6341dd95cb37fa11975f3, type: 3}
       propertyPath: m_FontData.m_VerticalOverflow
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7764203590785303117, guid: 606f8a2c01c6341dd95cb37fa11975f3, type: 3}
       propertyPath: m_FontData.m_MinSize
