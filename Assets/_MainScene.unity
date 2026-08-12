@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3684136152136640340, guid: 3975b664627adb342ac0c03bd9931a85, type: 3}
+      propertyPath: m_SortingOrder
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6681985913789295147, guid: 3975b664627adb342ac0c03bd9931a85, type: 3}
       propertyPath: m_LocalPosition.x
       value: 22
@@ -166,6 +170,10 @@ PrefabInstance:
     - target: {fileID: 6681985913789295147, guid: 3975b664627adb342ac0c03bd9931a85, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7795769471195938262, guid: 3975b664627adb342ac0c03bd9931a85, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9072700324788999735, guid: 3975b664627adb342ac0c03bd9931a85, type: 3}
       propertyPath: m_Name
@@ -3086,6 +3094,7 @@ GameObject:
   - component: {fileID: 1068595002}
   - component: {fileID: 1068595004}
   - component: {fileID: 1068595003}
+  - component: {fileID: 1068595005}
   m_Layer: 5
   m_Name: BG
   m_TagString: Untagged
@@ -3132,7 +3141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4c0387cc437d9fe48947447f05ee2e77, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3ab079d867080324dbc9c86bbba9a3d6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3150,6 +3159,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1068595001}
   m_CullTransparentMesh: 1
+--- !u!114 &1068595005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068595001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.AspectRatioFitter
+  m_AspectMode: 4
+  m_AspectRatio: 1.778
 --- !u!1 &1071976846
 GameObject:
   m_ObjectHideFlags: 0
@@ -3202,7 +3225,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 16
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -3270,6 +3293,10 @@ PrefabInstance:
     - target: {fileID: 1819853606935060441, guid: 871329692f42a4cb3ae9faaaf261ad51, type: 3}
       propertyPath: m_Name
       value: ShakerTool
+      objectReference: {fileID: 0}
+    - target: {fileID: 5163726147750932339, guid: 871329692f42a4cb3ae9faaaf261ad51, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7553719473220633255, guid: 871329692f42a4cb3ae9faaaf261ad51, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4594,8 +4621,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 466, y: -224}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 1459, y: -197}
+  m_SizeDelta: {x: 160, y: 33.7987}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1888608974
 MonoBehaviour:
