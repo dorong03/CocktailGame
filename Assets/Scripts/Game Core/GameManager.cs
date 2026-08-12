@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     
     public void Start()
     {
+        SoundManager.Instance.BGM();
         Application.targetFrameRate = 60;
         timer.OnTimeOver += HandleTimeOver;
         GoToMainMenu();
@@ -44,6 +45,7 @@ public class GameManager : MonoBehaviour
         timer.Prepare(timeLimit);
         NextRound();
         OnGameStart?.Invoke();
+        SoundManager.Instance.StartGameSound();
     }
 
     public void RestartGame()

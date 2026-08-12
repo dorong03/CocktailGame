@@ -192,7 +192,6 @@ public class Cup : MonoBehaviour, IPourTarget
             if (isThrowing || !gameObject.activeInHierarchy) return;
             isThrowing = true;
             drag.interactable = false;
-
             Vector2 pull = (Vector2)drag.CurrentWorldPos - PullOrigin;
             float duration = Mathf.Lerp(minFlightDuration, maxFlightDuration, GetPullRatio(pull));
             StartCoroutine(ThrowRoutine(GetLandingPosition(pull), duration));
@@ -211,8 +210,9 @@ public class Cup : MonoBehaviour, IPourTarget
             transform.position = Vector2.Lerp(start, target, EaseOutCubic(timer / duration));
 
             if (tableBoundary != null && IsOutsideTable(transform.position))
-            {
+            {                SoundManager.Instance.BreakGlassSound();
                 yield return StartCoroutine(FallOffRoutine(transform.position.y > tableBoundary.bounds.max.y));
+
                 yield break;
             }
             yield return null;

@@ -29,6 +29,7 @@ public class BarSpoonTool : ToolBase
         base.GrabHandler();
         if (started)
         {
+            SoundManager.Instance.PlayStir();
             drag.SetCollider(barSpoonCollider);
         }
     }
@@ -36,14 +37,13 @@ public class BarSpoonTool : ToolBase
     public override void HandleDelta(Vector2 delta)
     {
         Vector3 target = drag.CurrentWorldPos;
-
         if (moveAreaCollider != null)
         {
             Bounds b = moveAreaCollider.bounds;
             target.x = Mathf.Clamp(target.x, b.min.x, b.max.x);
             target.y = Mathf.Clamp(target.y, b.min.y, b.max.y);
         }
-
+        
         transform.position = target;
 
         Vector2 dir = (Vector2)target - (Vector2)stirCenter.position;
@@ -75,6 +75,7 @@ public class BarSpoonTool : ToolBase
 
     public override void ResetMotion()
     {
+        SoundManager.Instance.StopStir();
         transform.position = originPos;
         hasLastAngle = false;
         accumulatedAngle = 0f;

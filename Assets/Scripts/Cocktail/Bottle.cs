@@ -53,6 +53,7 @@ public class Bottle : MonoBehaviour
     private Vector2 homePos;
     private float dropTimer;
 
+
     private void Awake()
     {
         homePos = transform.position;
@@ -119,7 +120,7 @@ public class Bottle : MonoBehaviour
             Tilt();
             if(tilt > pourThresholdAngle)
             {
-                SpawnDroplets();
+                SpawnDroplets();                
             }
         }
         if (Mouse.current.rightButton.wasReleasedThisFrame)
@@ -150,6 +151,7 @@ public class Bottle : MonoBehaviour
     
     private void HandleRelease()
     {
+        SoundManager.Instance.StopPour();
         transform.position = homePos;
         ResetTilt();
     }
@@ -171,14 +173,17 @@ public class Bottle : MonoBehaviour
     private void ApplyTiltRotation()
     {
         transform.rotation = Quaternion.Euler(0f, 0f, tilt);
-        if (drag.IsGrabbed) MoveCenterTo(drag.CurrentWorldPos);
-    }
-    
+        if (drag.IsGrabbed)
+        {
+            MoveCenterTo(drag.CurrentWorldPos);
+        }
+}
+
+
     private void SpawnDroplets()
     {
         dropTimer -= Time.deltaTime;
         if (dropTimer > 0f) return;
-
         dropTimer = dropInterval;
         SpawnDroplet();
     }
@@ -188,7 +193,6 @@ public class Bottle : MonoBehaviour
         Droplet d = Instantiate(dropletPrefab, mouthPoint.position, Quaternion.identity);
         float power = Mathf.Lerp(dropMinPower, dropMaxPower, tilt / maxTiltAngle);
         Vector2 v = (Vector2)mouthPoint.up * power;
-        
         float amountPerDrop = pourRate * dropInterval;
         d.Launch(v, 1f, ingredientId, amountPerDrop, currentTarget ,onPour);
     }

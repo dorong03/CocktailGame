@@ -35,13 +35,17 @@ public class ShakerTool : ToolBase
     protected override void GrabHandler()
     {
         base.GrabHandler();
-        if (started) StartCoroutine(CloseShaker());
+        if (started)
+        {
+            StartCoroutine(CloseShaker());
+        }
     }
 
     private IEnumerator CloseShaker()
     {
         // 뚜껑이 닫히는 코드 구현
         // 추후 애니메이션 구현
+        SoundManager.Instance.PlayShake();
         head.SetParent(targetParent);
         head.position = closeHeadPos.position;
         yield return null;
@@ -77,7 +81,6 @@ public class ShakerTool : ToolBase
     {
         bool isUp = (delta.y > 0);
         float yDeltaSpeed = Mathf.Abs(delta.y);
-        
         Debug.Log(yDeltaSpeed);
         
         if (!(yDeltaSpeed > speedThreshold)) return;
@@ -92,6 +95,7 @@ public class ShakerTool : ToolBase
 
     public override void ResetMotion()
     {
+        SoundManager.Instance.StopShake();
         transform.position = originPos;
     }
 
