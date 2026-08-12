@@ -44,9 +44,11 @@ public class DragInput : MonoBehaviour
         Vector2 screenPos = Mouse.current.position.ReadValue();
         Vector2 worldPos = _camera.ScreenToWorldPoint(screenPos);
 
+        // 상호작용이 꺼져있으면 잡고 있던것만 놓고 새로 잡지는 못하게 막는다
         if(!interactable)
         {
             CancleGrab();
+            return;
         }
 
         if(!IsGrabbed)

@@ -50,7 +50,6 @@ public class Bottle : MonoBehaviour
     private IPourTarget currentTarget;
     private Action<string, float> onPour;
     
-    private Vector3 offset;
     private Vector2 homePos;
     private float dropTimer;
 
@@ -129,14 +128,24 @@ public class Bottle : MonoBehaviour
         }
     }
     
+    // 콜라이더(스프라이트)의 중심. 스프라이트 피벗이 아래쪽이라 트랜스폼 원점과 다르다
+    private Vector3 ColliderCenter => transform.TransformPoint(boxCollider.offset);
+
+    // 콜라이더 중심이 지정한 월드 좌표에 오도록 트랜스폼을 옮긴다
+    private void MoveCenterTo(Vector3 worldPos)
+    {
+        transform.position += worldPos - ColliderCenter;
+    }
+
+    // 조작감을 위해 잡은 위치와 상관없이 콜라이더 중심이 커서에 오도록 맞춘다
     private void HandleGrab()
     {
-        offset = transform.position - drag.GrabWorldPos;
+        MoveCenterTo(drag.GrabWorldPos);
     }
 
     private void HandleDrag(Vector2 delta)
     {
-        transform.position = drag.CurrentWorldPos + offset;
+        MoveCenterTo(drag.CurrentWorldPos);
     }
     
     private void HandleRelease()
@@ -157,9 +166,12 @@ public class Bottle : MonoBehaviour
         ApplyTiltRotation();
     }
 
+    // 피벗이 아래쪽이라 그냥 돌리면 병이 휘둘리듯 움직인다
+    // 회전 후 중심을 커서 위치로 되돌려서 중앙 기준으로 도는 것처럼 보이게 한다
     private void ApplyTiltRotation()
     {
         transform.rotation = Quaternion.Euler(0f, 0f, tilt);
+        if (drag.IsGrabbed) MoveCenterTo(drag.CurrentWorldPos);
     }
     
     private void SpawnDroplets()

@@ -1011,6 +1011,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_HorizontalOverflow
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7553345145253354662, guid: 606f8a2c01c6341dd95cb37fa11975f3, type: 3}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7764203590785303117, guid: 606f8a2c01c6341dd95cb37fa11975f3, type: 3}
       propertyPath: m_FontData.m_MinSize
       value: 3
@@ -2460,7 +2464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b711ac539a1547646b16ae8f88f8fddd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  timeLimit: 30
+  timeLimit: 60
   orderService: {fileID: 337112954}
   npcController: {fileID: 788048643}
   timer: {fileID: 604283299}
@@ -3259,6 +3263,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1188345959050029634, guid: 871329692f42a4cb3ae9faaaf261ad51, type: 3}
+      propertyPath: count
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1819853606935060441, guid: 871329692f42a4cb3ae9faaaf261ad51, type: 3}
       propertyPath: m_Name
       value: ShakerTool
@@ -5332,7 +5340,7 @@ PrefabInstance:
       objectReference: {fileID: 475888539}
     - target: {fileID: 8532754459706489464, guid: 2353b531150072d4b94167f4c2c11001, type: 3}
       propertyPath: maxPullDistance
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 8532754459706489464, guid: 2353b531150072d4b94167f4c2c11001, type: 3}
       propertyPath: maxThrowDistance
@@ -5340,7 +5348,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8532754459706489464, guid: 2353b531150072d4b94167f4c2c11001, type: 3}
       propertyPath: minThrowDistance
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8532754459706489464, guid: 2353b531150072d4b94167f4c2c11001, type: 3}
       propertyPath: maxFlightDuration
@@ -5559,5 +5567,5 @@ SceneRoots:
   - {fileID: 101416359}
   - {fileID: 788048644}
   - {fileID: 1071976850}
-  - {fileID: 1078029083}
   - {fileID: 14911705}
+  - {fileID: 1078029083}

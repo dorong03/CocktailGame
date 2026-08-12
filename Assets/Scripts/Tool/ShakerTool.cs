@@ -7,7 +7,7 @@ public class ShakerTool : ToolBase
 {
     private const int ShakerToolCount = 5;
 
-    private float speedThreshold = 0.3f;
+    private float speedThreshold = 6f;
     private bool direction = true;
 
     private Vector2 originPos;
@@ -77,7 +77,9 @@ public class ShakerTool : ToolBase
     {
         bool isUp = (delta.y > 0);
         float yDeltaSpeed = Mathf.Abs(delta.y);
-
+        
+        Debug.Log(yDeltaSpeed);
+        
         if (!(yDeltaSpeed > speedThreshold)) return;
 
         if (direction == isUp)
