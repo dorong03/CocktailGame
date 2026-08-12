@@ -33,7 +33,7 @@ public class ServingController : MonoBehaviour
     // 잔이 던져진 뒤 착지 판정
     private void CupLandHandler(Vector2 cupPosition)
     {
-        Grade grade = targetSeat.EvaluateLanding(cupPosition);
+        Grade grade = (cup.IsBroken) ? Grade.Miss : targetSeat.EvaluateLanding(cupPosition);
         onComplete(grade);
     }
 }

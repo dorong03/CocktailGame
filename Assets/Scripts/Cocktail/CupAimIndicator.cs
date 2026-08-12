@@ -21,9 +21,16 @@ public class CupAimIndicator : MonoBehaviour
 
     private void Awake()
     {
+        EnsureInit();
+        Hide();
+    }
+
+    // Awake 순서가 보장되지 않아 Cup 쪽에서 먼저 호출될 수 있음
+    private void EnsureInit()
+    {
+        if (aimLine != null) return;
         aimLine = CreateLine("AimLine", lineColor, 2, false);
         marker = CreateLine("AimMarker", markerColor, MarkerSegments, true);
-        Hide();
     }
 
     private LineRenderer CreateLine(string lineName, Color color, int pointCount, bool loop)
@@ -50,18 +57,21 @@ public class CupAimIndicator : MonoBehaviour
 
     public void Show()
     {
+        EnsureInit();
         aimLine.enabled = true;
         marker.enabled = true;
     }
 
     public void Hide()
     {
+        EnsureInit();
         aimLine.enabled = false;
         marker.enabled = false;
     }
 
     public void UpdateAim(Vector2 origin, Vector2 landing)
     {
+        EnsureInit();
         aimLine.SetPosition(0, origin);
         aimLine.SetPosition(1, landing);
 

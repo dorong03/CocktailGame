@@ -85,13 +85,19 @@ public class GameManager : MonoBehaviour
         OnRecipeSelected?.Invoke();
     }
 
-    private void OnStationComplete(MixResult mixResult,Grade grade)
+    private void OnStationComplete(MixResult mixResult,Grade grade, bool cupIsBroken)
     {
         ChangePhase(GamePhase.Processing);
+
+        int currentRecipeScore = 0;
+        float bonusSecond = 0;
         
-        float accuracy = ScoreCalculator.GetMixAccuracy(currentOrder.Recipe, mixResult);
-        int currentRecipeScore = ScoreCalculator.GetFinalScore(currentOrder.Recipe.BaseScore, accuracy);
-        float bonusSecond = ScoreCalculator.GetBonusSeconds(grade);
+        if (!cupIsBroken)
+        {
+            float accuracy = ScoreCalculator.GetMixAccuracy(currentOrder.Recipe, mixResult);
+            currentRecipeScore = ScoreCalculator.GetFinalScore(currentOrder.Recipe.BaseScore, accuracy);
+            bonusSecond = ScoreCalculator.GetBonusSeconds(grade);
+        }
         
         scoreSystem.AddCurrentScore(currentRecipeScore);
         timer.AddBonus(bonusSecond);

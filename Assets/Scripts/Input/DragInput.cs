@@ -79,8 +79,12 @@ public class DragInput : MonoBehaviour
     
     public void CancleGrab()
     {
+        bool wasGrabbed = IsGrabbed;
         IsGrabbed = false;
         if (DragItem == this) DragItem = null;
+        // 잡은 적이 없으면 놓는 콜백도 없어야 함
+        // (interactable == false 일때 Update 에서 매 프레임 호출되기 때문)
+        if (!wasGrabbed) return;
         onRelease?.Invoke();
     }
 

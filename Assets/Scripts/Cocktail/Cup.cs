@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(DragInput))]
 public class Cup : MonoBehaviour, IPourTarget
 {
-    
+    public bool IsBroken { get; private set; }
 
     [Header("스프라이트 렌더러 설정")]
     [SerializeField] 
@@ -54,6 +54,7 @@ public class Cup : MonoBehaviour, IPourTarget
 
     private Vector2 homePos;
     private float fillHeight;
+    private bool isThrowing;
 
     private Action onSubmit;
     private Action<Vector2> onCupLand;
@@ -113,14 +114,14 @@ public class Cup : MonoBehaviour, IPourTarget
 
     private void HandleGrab()
     {
-        if (mode != CupMode.Throwable || aimIndicator == null) return;
+        if (mode != CupMode.Throwable || isThrowing || aimIndicator == null) return;
         aimIndicator.Show();
         UpdateAimIndicator();
     }
 
     private void HandleDrag(Vector2 delta)
     {
-        if (mode != CupMode.Throwable || aimIndicator == null) return;
+        if (mode != CupMode.Throwable || isThrowing || aimIndicator == null) return;
         UpdateAimIndicator();
     }
 
@@ -152,6 +153,8 @@ public class Cup : MonoBehaviour, IPourTarget
         switch (mode)
         {
             case CupMode.Locked:
+                // 조준 중에 잠기는 경우(시간 종료 / 주문 중단)가 있어서 궤적을 직접 정리
+                HideAim();
                 drag.interactable = false;
                 break;
             case CupMode.Submit:
@@ -163,8 +166,16 @@ public class Cup : MonoBehaviour, IPourTarget
         }
     }
 
+    private void HideAim()
+    {
+        if (aimIndicator != null) aimIndicator.Hide();
+    }
+
     private void HandleRelease()
     {
+        // 어떤 모드로 끝나든 궤적은 항상 정리
+        HideAim();
+
         if (mode == CupMode.Submit)
         {
             //되돌리기
@@ -177,7 +188,10 @@ public class Cup : MonoBehaviour, IPourTarget
         else if (mode == CupMode.Throwable)
         {
             //던지기
-            if (aimIndicator != null) aimIndicator.Hide();
+            // 잔이 꺼지면서(OnDisable) 놓기 콜백이 오는 경우엔 던지지 않음
+            if (isThrowing || !gameObject.activeInHierarchy) return;
+            isThrowing = true;
+            drag.interactable = false;
 
             Vector2 pull = (Vector2)drag.CurrentWorldPos - PullOrigin;
             float duration = Mathf.Lerp(minFlightDuration, maxFlightDuration, GetPullRatio(pull));
@@ -204,13 +218,15 @@ public class Cup : MonoBehaviour, IPourTarget
             yield return null;
         }
         transform.position = target;
+        isThrowing = false;
         onCupLand?.Invoke(landing);
     }
 
     private IEnumerator FallOffRoutine(bool exitedUpward)
     {
+        IsBroken = true;
         if (exitedUpward) PushBehindTable();
-
+        
         Vector2 start = transform.position;
         Vector2 target = start + Vector2.down * fallDistance;
         float startAngle = transform.eulerAngles.z;
@@ -226,6 +242,7 @@ public class Cup : MonoBehaviour, IPourTarget
         }
 
         SetFill(0f, Color.white);
+        isThrowing = false;
         onCupLand?.Invoke(PullOrigin);
     }
 
@@ -277,6 +294,7 @@ public class Cup : MonoBehaviour, IPourTarget
 
     public void Show(RecipeData recipe)
     {
+        IsBroken = false;
         // 레시피에 맞게 변경
         Sprite glassFront = SpriteRepository.Instance.GetGlassSprites(recipe.GlassType).FrontSprite;
         Sprite glassBack = SpriteRepository.Instance.GetGlassSprites(recipe.GlassType).BackSprite;
@@ -294,6 +312,8 @@ public class Cup : MonoBehaviour, IPourTarget
 
         SetFill(0f, Color.white);
         RestoreSortingOrder();
+        // 비행 중 잔이 꺼지면 코루틴이 죽어서 플래그가 남아있을 수 있음
+        isThrowing = false;
         transform.position = homePos;
         transform.rotation = Quaternion.identity;
         gameObject.SetActive(true);
@@ -301,6 +321,8 @@ public class Cup : MonoBehaviour, IPourTarget
 
     public void Hide()
     {
+        HideAim();
+        isThrowing = false;
         cupBackRenderer.sprite = null;
         cupFrontRenderer.sprite = null;
         cupFillRenderer.sprite = null;

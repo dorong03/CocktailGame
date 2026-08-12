@@ -72,7 +72,7 @@ public abstract class ToolBase : MonoBehaviour
     /*
      * 도구 사용 중단
      */
-    public void Abort()
+    public virtual void Abort()
     {
         count = 0;
         started = false;

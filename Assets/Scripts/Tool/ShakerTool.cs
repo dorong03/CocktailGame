@@ -27,9 +27,9 @@ public class ShakerTool : ToolBase
     protected override void Awake()
     {
         base.Awake();
+        Hide();
         originPos = transform.position;
         requiredCount = ShakerToolCount;
-        Hide();
     }
 
     protected override void GrabHandler()
@@ -56,9 +56,15 @@ public class ShakerTool : ToolBase
     {
         // 뚜껑이 열리는 코드
         // 추후 애니메이션 구현
+        OpenHeadImmediate();
+        yield return null;
+    }
+
+    // 연출 없이 뚜껑 상태만 초기화
+    private void OpenHeadImmediate()
+    {
         head.SetParent(homeTargetParent);
         head.position = homeHeadPos.position;
-        yield return null;
     }
     
     public override void HandleDelta(Vector2 delta)
@@ -87,10 +93,19 @@ public class ShakerTool : ToolBase
         transform.position = originPos;
     }
 
+    // 흔들기를 끝내지 못하고 중단되면(시간 종료 / 주문 취소) 뚜껑이 닫힌 채로 남는다
+    public override void Abort()
+    {
+        base.Abort();
+        StopAllCoroutines();
+        OpenHeadImmediate();
+    }
+
     public override void Show()
     {
         gameObject.SetActive(true);
         head.gameObject.SetActive(true);
+        OpenHeadImmediate();
     }
     
     public override void Hide()

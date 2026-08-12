@@ -24,7 +24,7 @@ public class PlayerStationController : MonoBehaviour
     private Seat seat;
     private MixingCup currentMixingCup;
     private MixResult currentMixResult;
-    private Action<MixResult, Grade> onOrderComplete;
+    private Action<MixResult, Grade, bool> onOrderComplete;
     
     private void Start()
     {
@@ -32,7 +32,7 @@ public class PlayerStationController : MonoBehaviour
         barSpoon.gameObject.SetActive(false);
     }
 
-    public void BeginOrder(RecipeData recipe, Seat seat, Action<MixResult, Grade> onComplete)
+    public void BeginOrder(RecipeData recipe, Seat seat, Action<MixResult, Grade, bool> onComplete)
     {
         this.recipe = recipe;
         this.seat = seat;
@@ -103,8 +103,8 @@ public class PlayerStationController : MonoBehaviour
     {
         MixResult mix = currentMixResult;
         currentMixResult = null;
+        onOrderComplete?.Invoke(mix, grade, cup.IsBroken);
         ClearStage();
-        onOrderComplete?.Invoke(mix, grade);
     }
 
     // 재료를 다 안넣어서 도구 사용이 안될때 효과 추후 추가할 듯
