@@ -59,6 +59,7 @@ public class Cup : MonoBehaviour, IPourTarget
     private Action onSubmit;
     private Action<Vector2> onCupLand;
 
+    private DateTime startTime;
     // 술이 차오르는 픽셀 기준
     const int PixelStep = 32;
 
@@ -70,7 +71,6 @@ public class Cup : MonoBehaviour, IPourTarget
         drag.onGrab = HandleGrab;
         drag.onDragDelta = HandleDrag;
         drag.onRelease = HandleRelease;
-
         cupRenderers = new[] { cupBackRenderer, cupFillRenderer, cupFrontRenderer };
         baseSortingOrders = new int[cupRenderers.Length];
         for (int i = 0; i < cupRenderers.Length; i++)
@@ -210,9 +210,10 @@ public class Cup : MonoBehaviour, IPourTarget
             transform.position = Vector2.Lerp(start, target, EaseOutCubic(timer / duration));
 
             if (tableBoundary != null && IsOutsideTable(transform.position))
-            {                SoundManager.Instance.BreakGlassSound();
+            {
+                startTime = DateTime.Now;
+                Invoke("BreakSound", 0.3f);           
                 yield return StartCoroutine(FallOffRoutine(transform.position.y > tableBoundary.bounds.max.y));
-
                 yield break;
             }
             yield return null;
@@ -220,6 +221,11 @@ public class Cup : MonoBehaviour, IPourTarget
         transform.position = target;
         isThrowing = false;
         onCupLand?.Invoke(landing);
+    }
+
+    private void BreakSound()
+    {
+        SoundManager.Instance.BreakGlassSound();
     }
 
     private IEnumerator FallOffRoutine(bool exitedUpward)

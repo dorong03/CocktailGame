@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class SoundManager : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioSource pour;
     [SerializeField] private AudioSource breakenGlass;
     [SerializeField] private AudioSource startBell;
+    [SerializeField]private AudioClip pourSound;
 
     private void Awake()
     {
@@ -50,7 +52,7 @@ public class SoundManager : MonoBehaviour
 
     public void PlayPour() 
     {
-        pour.Play(); 
+        pour.PlayOneShot(pourSound, 1f);
     }
 
     public void StopPour() 

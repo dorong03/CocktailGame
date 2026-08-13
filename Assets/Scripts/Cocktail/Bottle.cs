@@ -53,6 +53,7 @@ public class Bottle : MonoBehaviour
     private Vector2 homePos;
     private float dropTimer;
 
+    private bool playSound = false;
 
     private void Awake()
     {
@@ -165,6 +166,8 @@ public class Bottle : MonoBehaviour
     private void ResetTilt()
     {
         tilt = 0f;
+        playSound = false;
+        SoundManager.Instance.StopPour();
         ApplyTiltRotation();
     }
 
@@ -186,6 +189,15 @@ public class Bottle : MonoBehaviour
         if (dropTimer > 0f) return;
         dropTimer = dropInterval;
         SpawnDroplet();
+        if (playSound == true)
+        {
+            return;
+        }
+        else
+        {
+            SoundManager.Instance.PlayPour();
+            playSound = true;
+        }
     }
 
     private void SpawnDroplet()
