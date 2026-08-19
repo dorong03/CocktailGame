@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: bc5f0b237374ff347b8674d5a8514640
+guid: 5f058000dd850be47bd28d1e7522511f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8332791819304334754
-    second: ING_016_0
+      213: 7640648627105108369
+    second: ING_018_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ING_016_0
+      name: ING_018_0
       rect:
         serializedVersion: 2
-        x: 23
+        x: 17
         y: 0
-        width: 44
-        height: 96
+        width: 56
+        height: 168
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 2a57ae8b20604a370800000000000000
-      internalID: 8332791819304334754
+      spriteID: 1911d28c179090a60800000000000000
+      internalID: 7640648627105108369
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      ING_016_0: 8332791819304334754
+      ING_018_0: 7640648627105108369
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

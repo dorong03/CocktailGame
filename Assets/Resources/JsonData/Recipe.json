@@ -4,7 +4,7 @@
     "Name": "레몬 하이라이트",
     "BaseScore": 900,
     "ToolId": null,
-    "Ingredients": [{"IngredientId": "ING_000", "Amount": 20}, {"IngredientId": "ING_002", "Amount": 15}, {"IngredientId": "ING_004", "Amount": 90}],
+    "Ingredients": [{"IngredientId": "ING_010", "Amount": 20}, {"IngredientId": "ING_005", "Amount": 15}, {"IngredientId": "ING_017", "Amount": 90}],
     "GlassType": "Rocks"
   },
   {
@@ -12,7 +12,7 @@
     "Name": "블루베리 보드카 사워",
     "BaseScore": 1100,
     "ToolId": "TOOL_000",
-    "Ingredients": [{"IngredientId": "ING_006", "Amount": 45}, {"IngredientId": "ING_016", "Amount": 15}, {"IngredientId": "ING_000", "Amount": 20}],
+    "Ingredients": [{"IngredientId": "ING_022", "Amount": 45}, {"IngredientId": "ING_016", "Amount": 15}, {"IngredientId": "ING_010", "Amount": 20}],
     "GlassType": "Martini"
   },
   {
@@ -20,7 +20,7 @@
     "Name": "자몽 데킬라 팔로마",
     "BaseScore": 1100,
     "ToolId": "TOOL_001",
-    "Ingredients": [{"IngredientId": "ING_014", "Amount": 45}, {"IngredientId": "ING_013", "Amount": 90}, {"IngredientId": "ING_001", "Amount": 15}],
+    "Ingredients": [{"IngredientId": "ING_007", "Amount": 45}, {"IngredientId": "ING_003", "Amount": 90}, {"IngredientId": "ING_013", "Amount": 15}],
     "GlassType": "Highball"
   },
   {
@@ -28,7 +28,7 @@
     "Name": "살몬핑크 피치보드카",
     "BaseScore": 1100,
     "ToolId": "TOOL_000",
-    "Ingredients": [{"IngredientId": "ING_006", "Amount": 40}, {"IngredientId": "ING_012", "Amount": 20}, {"IngredientId": "ING_013", "Amount": 20}],
+    "Ingredients": [{"IngredientId": "ING_022", "Amount": 40}, {"IngredientId": "ING_002", "Amount": 20}, {"IngredientId": "ING_003", "Amount": 20}],
     "GlassType": "Martini"
   },
   {
@@ -36,7 +36,7 @@
     "Name": "스트로베리 리큐르 스매시",
     "BaseScore": 1100,
     "ToolId": "TOOL_000",
-    "Ingredients": [{"IngredientId": "ING_011", "Amount": 30}, {"IngredientId": "ING_017", "Amount": 30}, {"IngredientId": "ING_001", "Amount": 20}],
+    "Ingredients": [{"IngredientId": "ING_001", "Amount": 30}, {"IngredientId": "ING_020", "Amount": 30}, {"IngredientId": "ING_013", "Amount": 20}],
     "GlassType": "Margarita"
   },
   {
@@ -44,7 +44,7 @@
     "Name": "압생트 프라페",
     "BaseScore": 1100,
     "ToolId": "TOOL_001",
-    "Ingredients": [{"IngredientId": "ING_015", "Amount": 30}, {"IngredientId": "ING_004", "Amount": 90}, {"IngredientId": "ING_003", "Amount": 15}],
+    "Ingredients": [{"IngredientId": "ING_015", "Amount": 30}, {"IngredientId": "ING_017", "Amount": 90}, {"IngredientId": "ING_021", "Amount": 15}],
     "GlassType": "Highball"
   },
   {
@@ -52,7 +52,7 @@
     "Name": "블루베리 진 토닉",
     "BaseScore": 1100,
     "ToolId": "TOOL_001",
-    "Ingredients": [{"IngredientId": "ING_007", "Amount": 45}, {"IngredientId": "ING_016", "Amount": 15}, {"IngredientId": "ING_008", "Amount": 90}],
+    "Ingredients": [{"IngredientId": "ING_018", "Amount": 45}, {"IngredientId": "ING_016", "Amount": 15}, {"IngredientId": "ING_019", "Amount": 90}],
     "GlassType": "Highball"
   },
   {
@@ -60,7 +60,7 @@
     "Name": "글레이셔 블루",
     "BaseScore": 1200,
     "ToolId": "TOOL_001",
-    "Ingredients": [{"IngredientId": "ING_006", "Amount": 40}, {"IngredientId": "ING_016", "Amount": 15}, {"IngredientId": "ING_003", "Amount": 15}, {"IngredientId": "ING_008", "Amount": 60}],
+    "Ingredients": [{"IngredientId": "ING_022", "Amount": 40}, {"IngredientId": "ING_016", "Amount": 15}, {"IngredientId": "ING_021", "Amount": 15}, {"IngredientId": "ING_019", "Amount": 60}],
     "GlassType": "Margarita"
   },
   {
@@ -68,7 +68,7 @@
     "Name": "아이스블루 미스트",
     "BaseScore": 1100,
     "ToolId": "TOOL_001",
-    "Ingredients": [{"IngredientId": "ING_006", "Amount": 45}, {"IngredientId": "ING_016", "Amount": 5}, {"IngredientId": "ING_004", "Amount": 30}],
+    "Ingredients": [{"IngredientId": "ING_022", "Amount": 45}, {"IngredientId": "ING_016", "Amount": 5}, {"IngredientId": "ING_017", "Amount": 30}],
     "GlassType": "Martini"
   },
   {
@@ -76,7 +76,7 @@
     "Name": "보드카 소다",
     "BaseScore": 800,
     "ToolId": null,
-    "Ingredients": [{"IngredientId": "ING_006", "Amount": 45}, {"IngredientId": "ING_004", "Amount": 90}],
+    "Ingredients": [{"IngredientId": "ING_022", "Amount": 45}, {"IngredientId": "ING_017", "Amount": 90}],
     "GlassType": "Rocks"
   },
   {
@@ -84,7 +84,7 @@
     "Name": "민트 왕관",
     "BaseScore": 1100,
     "ToolId": "TOOL_000",
-    "Ingredients": [{"IngredientId": "ING_000", "Amount": 20}, {"IngredientId": "ING_003", "Amount": 15}, {"IngredientId": "ING_009", "Amount": 60}],
+    "Ingredients": [{"IngredientId": "ING_010", "Amount": 20}, {"IngredientId": "ING_021", "Amount": 15}, {"IngredientId": "ING_014", "Amount": 60}],
     "GlassType": "Margarita"
   },
   {
@@ -92,7 +92,7 @@
     "Name": "자몽 선라이즈",
     "BaseScore": 1100,
     "ToolId": "TOOL_001",
-    "Ingredients": [{"IngredientId": "ING_014", "Amount": 45}, {"IngredientId": "ING_013", "Amount": 90}, {"IngredientId": "ING_011", "Amount": 15}],
+    "Ingredients": [{"IngredientId": "ING_007", "Amount": 45}, {"IngredientId": "ING_003", "Amount": 90}, {"IngredientId": "ING_001", "Amount": 15}],
     "GlassType": "Rocks"
   },
   {
@@ -100,7 +100,7 @@
     "Name": "블루베리 브랜디 사워",
     "BaseScore": 1100,
     "ToolId": "TOOL_000",
-    "Ingredients": [{"IngredientId": "ING_010", "Amount": 45}, {"IngredientId": "ING_016", "Amount": 15}, {"IngredientId": "ING_000", "Amount": 20}],
+    "Ingredients": [{"IngredientId": "ING_000", "Amount": 45}, {"IngredientId": "ING_016", "Amount": 15}, {"IngredientId": "ING_010", "Amount": 20}],
     "GlassType": "Rocks"
   },
   {
@@ -108,7 +108,7 @@
     "Name": "럼 사워",
     "BaseScore": 1100,
     "ToolId": "TOOL_000",
-    "Ingredients": [{"IngredientId": "ING_005", "Amount": 45}, {"IngredientId": "ING_002", "Amount": 15}, {"IngredientId": "ING_000", "Amount": 20}],
+    "Ingredients": [{"IngredientId": "ING_006", "Amount": 45}, {"IngredientId": "ING_005", "Amount": 15}, {"IngredientId": "ING_010", "Amount": 20}],
     "GlassType": "Rocks"
   }
 ]

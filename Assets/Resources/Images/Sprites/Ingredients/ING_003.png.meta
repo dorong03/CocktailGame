@@ -103,10 +103,10 @@ TextureImporter:
       name: ING_003_0
       rect:
         serializedVersion: 2
-        x: 29
+        x: 17
         y: 0
-        width: 38
-        height: 126
+        width: 62
+        height: 204
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
